@@ -39,7 +39,7 @@ const ListingCard = ({ listing }) => {
         </Text>
 
         {listing.type === 'facility' && (
-          <Text fontWeight="medium" fontSize="sm" color="gray.500" mb={2}>
+          <Text fontWeight="medium" fontSize="sm" color="black" mb={2}>
             Address: {listing.address}
           </Text>
         )}

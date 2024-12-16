@@ -25,9 +25,10 @@ import {
 } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { FaCalendarAlt } from 'react-icons/fa';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const InquireForm = () => {
-  const { listing, fetchListing } = useListingStore();
+  const { listing, fetchListing, isLoading: listingLoading } = useListingStore();
   const { createReservation, isLoading } = useReservationStore();
   const [availableListings, setAvailableListings] = useState([]);
   const [selectedListings, setSelectedListings] = useState([]);
@@ -45,6 +46,7 @@ const InquireForm = () => {
   useEffect(() => {
     fetchListing();
   }, [fetchListing]);
+
 
   useEffect(() => {
     // Filter listings with inventory > 0 or type is 'facility'
