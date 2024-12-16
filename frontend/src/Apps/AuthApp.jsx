@@ -4,6 +4,7 @@ import {useEffect} from 'react'
 import {useAuthStore} from '../store/auth'
 
 import LoginPage from '../authPages/LoginPage'
+import AdminLoginPage from '../authPages/AdminLoginPage'
 import RegisterAs from '../authPages/RegisterAs'
 // import AdminSignupPage from '../authPages/AdminSignupPage'
 import ResidentSignupPage from '../authPages/ResidentSignupPage'
@@ -47,9 +48,15 @@ function AuthApp() {
 
       <Routes>
 
-        <Route path='login' element={
+        <Route path='resident-login' element={
           <RedirectAuthenticatedUser>
             <LoginPage/>
+          </RedirectAuthenticatedUser>
+        } />
+
+        <Route path='admin-login' element={
+          <RedirectAuthenticatedUser>
+            <AdminLoginPage/>
           </RedirectAuthenticatedUser>
         } />
 

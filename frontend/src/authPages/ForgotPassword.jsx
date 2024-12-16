@@ -56,7 +56,7 @@ function ForgotPassword() {
       bg={useColorModeValue('gray.50', 'gray.800')}>
 
         <Button
-          onClick={() => navigate('/auth/login')}
+          onClick={() => navigate('/auth/resident-login' || '/auth/admin-login')}
           colorScheme="blue"
           variant="outline"
           position={{ base: 'relative', md: 'absolute' }}

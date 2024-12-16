@@ -35,7 +35,7 @@ export default function VerifySignup() {
       })
 
       if (role === 'admin') {
-        navigate('/admin/dashboard')
+        navigate('/admin/reservations')
       } else if (role === 'resident') {
         navigate('/resident')
       }

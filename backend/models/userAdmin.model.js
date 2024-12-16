@@ -15,7 +15,6 @@ const UserAdminSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: true,
     },
     profilePicture: {
         data: Buffer,

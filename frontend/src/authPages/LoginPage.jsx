@@ -109,9 +109,9 @@ function LoginPage() {
         >
           <Stack spacing={4}>
             <FormControl id="email">
-              <FormLabel>Email or Phone Number</FormLabel>
+              <FormLabel>Phone Number</FormLabel>
               <Input
-                type="text"
+                type="tel"
                 name="identifier"
                 value={formData.identifier}
                 onChange={handleChange}

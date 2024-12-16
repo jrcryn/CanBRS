@@ -288,7 +288,7 @@ const InquireForm = () => {
                 onChange={(e) => setStartDate(e.target.value)} />
             </InputGroup>
             <FormHelperText>
-              Enter the date when you will start using and borrowing the resources.
+              Enter the date when you will start using the resources.
             </FormHelperText>
           </FormControl>
 
@@ -304,7 +304,7 @@ const InquireForm = () => {
                   onChange={(e) => setEndDate(e.target.value)} />
               </InputGroup>
               <FormHelperText>
-                Enter the date when you will finish using and borrowing the resources. It can be the same day or one day later.
+                Enter the date when you will finish using the resources. It can be the same day as start date or one day later.
               </FormHelperText>
             </FormControl>
           </GridItem>

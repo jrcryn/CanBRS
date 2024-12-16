@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore()
 
   if (!isAuthenticated) {
-    return <Navigate to='/auth/login' replace />
+    return <Navigate to='/auth/resident-login' replace />
   }
   if (!user.isVerified) {
     return <Navigate to='/auth/verify-signup-otp' replace />

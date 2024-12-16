@@ -71,19 +71,19 @@ function Navbar() {
           spacing={6}>
         <Button
           as={Link}
-          to={'/auth/login'}
+          to={'/auth/resident-login'}
           display={{ base: 'none', md: 'inline-flex' }}
           fontSize={'sm'}
           fontWeight={600}
           color={'white'}
           bg={'blue.500'}
-          w={'100px'}
+          w={'150px'}
           _hover={{
             bg: 'red.500',
           }}
           leftIcon={<FaUser />}
         >
-          Login
+          Resident Login
         </Button>
 
 
