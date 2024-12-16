@@ -14,6 +14,7 @@ import AdminAccounts from '../adminPages/AdminAccounts'
 import ResidentAccounts from '../adminPages/ResidentAccounts'
 import UnverifiedResidents from '../adminPages/UnverifiedResident'
 import RegistrationKey from '../adminPages/RegistrationKey'
+import AdminSignupPage from '../adminPages/AdminSignupPage'
 import LoadingSpinner from '../components/LoadingSpinner'
 
 //protect routes that require authentication
@@ -51,6 +52,7 @@ function AdminApp() {
         <Route path='create-listing' element={<CreatePage />}/>
         <Route path='returned-resources' element={<ReturnedResources />}/>
         <Route path='admin-accounts' element={<AdminAccounts />}/>
+        <Route path='create-admin' element={<AdminSignupPage />}/>
         <Route path='resident-accounts' element={<ResidentAccounts />}/>
         <Route path='unverified-residents' element={<UnverifiedResidents />}/>
         <Route path='registration-key' element={<RegistrationKey />}/>

@@ -85,8 +85,8 @@ export const signup = async (req, res) => {
     
     try {
 
-        if (!name || !sitio || !email || !password || !registrationKey) {
-            return res.status(400).json({ success: false, message: 'Please provide all fields.' });
+        if (!name || !sitio || !email || !password || !registrationKey || !phone) {
+          return res.status(400).json({ message: 'Please fill all required fields' });
         }
 
         // Check if registration key is valid
@@ -106,23 +106,38 @@ export const signup = async (req, res) => {
         if (userAlreadyExists2) {
             return res.status(400).json({ success: false, message: 'User already exists as an admin.' });
         };
+
+        let profilePictureData = null;
+        if (profilePictureData) {
+          const imgData = fs.readFileSync(profilePictureData.path);
+          profilePictureData = {
+            data: imgData,
+            contentType: profilePictureData.mimetype,
+          };
+        }
         
         const hashedPassword = await bcrypt.hash(password, 10);
         const verificationToken = Math.floor(100000 + Math.random() * 900000).toString();
 
-        const user = new UserAdmin({ 
-            name, 
-            sitio, 
-            email, 
-            password: hashedPassword,
-            role: 'admin',
-            verificationToken,
-            verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000, //24 hours
-         });
+        const user = new UserAdmin({
+          name,
+          sitio,
+          email,
+          password: hashedPassword,
+          phone,
+          profilePicture: profilePictureData,
+          role: 'admin',
+          verificationToken,
+          verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000,
+        });
 
         await sendVerificationEmail(user.email, verificationToken);
 
         await user.save(); //save user
+
+        if (profilePictureData) {
+          fs.unlinkSync(profilePictureData.path);
+        }
 
         validKey.lastUsed = new Date();
         validKey.usedBy = user._id;

@@ -97,8 +97,9 @@ const UnverifiedResidents = () => {
             colorScheme="Blue" 
             onClick={() => navigate('/admin/resident-accounts')}
             bg={'blue.500'}
+            variant="outline"
             >
-                Go Back
+                ← Go Back
             </Button>
           </HStack>
         </HStack>

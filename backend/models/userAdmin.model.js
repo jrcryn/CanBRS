@@ -13,6 +13,14 @@ const UserAdminSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    phone: {
+        type: String,
+        required: true,
+    },
+    profilePicture: {
+        data: Buffer,
+        contentType: String,
+    },
     password: {
         type: String,
         required: true

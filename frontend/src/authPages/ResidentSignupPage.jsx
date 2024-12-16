@@ -168,7 +168,7 @@ function ResidentSignupPage() {
     <Flex minH={'100vh'} align={'center'} justify={'center'} px={4}>
       <Stack spacing={8} mx={'auto'} w={'full'} maxW={'5xl'} py={12}>
         <Button
-          onClick={() => navigate('/auth/register-as')}
+          onClick={() => navigate('/auth/login')}
           colorScheme="blue"
           variant="outline"
           position={{ base: 'relative', md: 'absolute' }}

@@ -168,7 +168,7 @@ function LoginPage() {
               <Stack>
                 <Text align="center" fontSize="sm" color="gray.600">
                   No account yet?{' '}
-                  <Text as={Link} to='/auth/register-as' color={'blue.400'}>Register Here</Text>
+                  <Text as={Link} to='/auth/resident-signup' color={'blue.400'}>Register Here</Text>
                 </Text>
               </Stack>
             </Stack>

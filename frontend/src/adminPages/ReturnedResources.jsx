@@ -87,8 +87,8 @@ const ReturnedResources = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </InputGroup>
-          <Button colorScheme='blue' onClick={() => navigate('/admin/in-use-resources')}>
-            Go Back
+          <Button colorScheme='blue' variant="outline" onClick={() => navigate('/admin/in-use-resources')}>
+          ← Go Back
           </Button>
           </HStack>
         </HStack>

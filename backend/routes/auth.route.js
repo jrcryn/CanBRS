@@ -25,7 +25,11 @@ const upload = multer({ storage });
 //verifyToken making the routes protected, utilized also in resident route
 router.get("/check-auth", verifyToken, checkAuth) //working backend
 
-router.post("/admin-signup", signup) //working backend
+router.post(
+  "/admin-signup", 
+  upload.single('profilePicture'), 
+  signup
+) //working backend
 
 router.post('/resident-signup', upload.fields([
     { name: 'validIDfront', maxCount: 1 },

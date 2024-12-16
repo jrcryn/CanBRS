@@ -1,7 +1,5 @@
-// frontend/src/adminPages/AdminAccounts.jsx
-
 import React, { useEffect, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Text,
@@ -24,7 +22,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-import { SearchIcon } from '@chakra-ui/icons';
+import { SearchIcon, AddIcon } from '@chakra-ui/icons';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
@@ -34,6 +32,7 @@ const AdminAccountsPage = () => {
 
   const { admins, isLoading, error, fetchAdmins } = UseResidentStore();
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -81,6 +80,11 @@ const AdminAccountsPage = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </InputGroup>
+            <HStack>
+            <Button colorScheme="blue" onClick={() => navigate('/admin/create-admin')} leftIcon={<AddIcon />}>
+              Create Admin
+            </Button>
+          </HStack>
           </HStack>
         </HStack>
 
@@ -121,7 +125,11 @@ const AdminCard = ({ admin }) => {
           <Avatar
             name={`${admin.name}`}
             size="lg"
-            src={admin.profilePicture || ''}
+            src={
+              admin.profilePicture
+                ? `data:${admin.profilePicture.contentType};base64,${admin.profilePicture.data}`
+                : ''
+            }
           />
 
           {/* Admin Info */}
@@ -141,70 +149,74 @@ const AdminCard = ({ admin }) => {
 
       {/* Details Modal */}
       <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
-  <ModalOverlay />
-  <ModalContent borderRadius="md" overflow="hidden">
-    {/* Header */}
-    <ModalHeader bg="blue.600" color="white" fontSize="xl">
-      Admin Details
-    </ModalHeader>
+      <ModalOverlay />
+      <ModalContent borderRadius="md" overflow="hidden">
+        {/* Header */}
+        <ModalHeader bg="blue.600" color="white" fontSize="xl">
+          Admin Details
+        </ModalHeader>
 
-    {/* Body */}
-    <ModalBody bg="gray.50" py={6}>
-      <VStack spacing={6} align="stretch">
-        {/* Admin Info */}
-        <HStack spacing={4}>
-          <Avatar
-            name={`${admin.name}`}
-            size="xl"
-            src={admin.profilePicture || ''}
-          />
-          <VStack align="start">
-            <Text fontWeight="bold" fontSize="2xl">
-              {admin.name}
-            </Text>
-            <Text color="gray.600">{admin.email}</Text>
-            <Text color="gray.600">{admin.phone || 'N/A'}</Text>
+        {/* Body */}
+        <ModalBody bg="gray.50" py={6}>
+          <VStack spacing={6} align="stretch">
+            {/* Admin Info */}
+            <HStack spacing={4}>
+            <Avatar
+              name={`${admin.name}`}
+              size="xl"
+              src={
+                admin.profilePicture
+                  ? `data:${admin.profilePicture.contentType};base64,${admin.profilePicture.data}`
+                  : ''
+              }
+            />
+              <VStack align="start">
+                <Text fontWeight="bold" fontSize="2xl">
+                  {admin.name}
+                </Text>
+                <Text color="gray.600">{admin.email}</Text>
+                <Text color="gray.600">{admin.phone || 'N/A'}</Text>
+              </VStack>
+            </HStack>
+
+            {/* Contact Information */}
+            <Box p={4} bg="white" borderRadius="md" shadow="sm" border="1px solid" borderColor="gray.200">
+              <Text fontWeight="bold" fontSize="lg" mb={2}>
+                Contact Information
+              </Text>
+              <Text>Email: {admin.email}</Text>
+              <Text>Phone: {admin.phone || 'N/A'}</Text>
+            </Box>
+
+            {/* Profile Picture Section */}
+            {admin.profilePicture && (
+              <Box p={4} bg="white" borderRadius="md" shadow="sm" border="1px solid" borderColor="gray.200">
+                <Text fontWeight="bold" fontSize="lg" mb={2}>
+                  Profile Picture
+                </Text>
+                <Zoom>
+                  <Avatar
+                    name={`${admin.firstname} ${admin.lastname}`}
+                    src={admin.profilePicture}
+                    size="2xl"
+                    borderRadius="md"
+                    border="1px solid"
+                    borderColor="gray.300"
+                  />
+                </Zoom>
+              </Box>
+            )}
           </VStack>
-        </HStack>
+        </ModalBody>
 
-        {/* Contact Information */}
-        <Box p={4} bg="white" borderRadius="md" shadow="sm" border="1px solid" borderColor="gray.200">
-          <Text fontWeight="bold" fontSize="lg" mb={2}>
-            Contact Information
-          </Text>
-          <Text>Email: {admin.email}</Text>
-          <Text>Phone: {admin.phone || 'N/A'}</Text>
-        </Box>
-
-        {/* Profile Picture Section */}
-        {admin.profilePicture && (
-          <Box p={4} bg="white" borderRadius="md" shadow="sm" border="1px solid" borderColor="gray.200">
-            <Text fontWeight="bold" fontSize="lg" mb={2}>
-              Profile Picture
-            </Text>
-            <Zoom>
-              <Avatar
-                name={`${admin.firstname} ${admin.lastname}`}
-                src={admin.profilePicture}
-                size="2xl"
-                borderRadius="md"
-                border="1px solid"
-                borderColor="gray.300"
-              />
-            </Zoom>
-          </Box>
-        )}
-      </VStack>
-    </ModalBody>
-
-    {/* Footer */}
-    <ModalFooter bg="gray.100">
-      <Button onClick={onClose} colorScheme="blue" width="full">
-        Close
-      </Button>
-    </ModalFooter>
-  </ModalContent>
-</Modal>
+        {/* Footer */}
+        <ModalFooter bg="gray.100">
+          <Button onClick={onClose} colorScheme="blue" width="full">
+            Close
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
 
     </>
   );
