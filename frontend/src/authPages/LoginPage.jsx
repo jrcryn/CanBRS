@@ -111,7 +111,7 @@ function LoginPage() {
             <FormControl id="email">
               <FormLabel>Phone Number</FormLabel>
               <Input
-                type="tel"
+                type="number"
                 name="identifier"
                 value={formData.identifier}
                 onChange={handleChange}
@@ -146,7 +146,7 @@ function LoginPage() {
                 <Text
                   color={'blue.400'}
                   as={Link}
-                  to='/auth/forgot-password'
+                  to='/auth/forgot-password-resident'
                   fontSize="sm" // Smaller font size
                 >
                   Forgot password?

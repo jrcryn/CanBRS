@@ -10,6 +10,7 @@ import RegisterAs from '../authPages/RegisterAs'
 import ResidentSignupPage from '../authPages/ResidentSignupPage'
 import VerifySignup from '../authPages/VerifySignup'
 import ForgotPassword from '../authPages/ForgotPassword'
+import ForgotPasswordAdmin from '../authPages/ForgotPasswordAdmin'
 import ResetPassword from '../authPages/ResetPassword'
 import LoginPageOtp from '../authPages/LoginOtpPage'
 import PleaseWaitForVerification from '../authPages/PleaseWaitForVerification'
@@ -60,11 +61,11 @@ function AuthApp() {
           </RedirectAuthenticatedUser>
         } />
 
-        <Route path='register-as' element={
+        {/* <Route path='register-as' element={
           <RedirectAuthenticatedUser>
             <RegisterAs/>
           </RedirectAuthenticatedUser>
-          } />
+          } /> */}
 
         {/* <Route path='admin-signup' element={
           <RedirectAuthenticatedUser>
@@ -80,9 +81,15 @@ function AuthApp() {
 
         <Route path='verify-signup-otp' element={<VerifySignup/>} />
 
-        <Route path='forgot-password' element={
+        <Route path='forgot-password-resident' element={
           <RedirectAuthenticatedUser>
             <ForgotPassword/>
+          </RedirectAuthenticatedUser>
+        } />
+
+        <Route path='forgot-password-admin' element={
+          <RedirectAuthenticatedUser>
+            <ForgotPasswordAdmin/>
           </RedirectAuthenticatedUser>
         } />
 

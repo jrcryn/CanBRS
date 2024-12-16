@@ -36,7 +36,7 @@ function ForgotPassword() {
         duration: 5000,
         isClosable: true,
       });
-      navigate('/auth/login');
+      navigate('/auth/resident-login');
     } catch (err) {
       toast({
         title: 'Error',
@@ -87,15 +87,15 @@ function ForgotPassword() {
         <Text
           fontSize={{ base: 'sm', sm: 'md' }}
           color={useColorModeValue('gray.800', 'gray.400')}>
-          If an account exists for the email or phone number provided, you will receive a password reset link shortly.
+          If an account exists for the phone number provided, you will receive a password reset SMS link shortly.
         </Text>
 
-        <FormControl id="email">
+        <FormControl id="number">
           <Input
-            placeholder="your-email@example.com"
+            placeholder="0123456789"
             _placeholder={{ color: 'gray.500' }}
             value={formData.identifier}
-            type="text"
+            type="number"
             onChange={handleChange}
           />
         </FormControl>

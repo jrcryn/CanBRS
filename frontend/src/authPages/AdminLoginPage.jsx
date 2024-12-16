@@ -141,7 +141,7 @@ import {
                 <Text
                   color={'blue.400'}
                   as={Link}
-                  to='/auth/forgot-password'
+                  to='/auth/forgot-password-admin'
                   fontSize="sm" // Smaller font size
                 >
                   Forgot password?

@@ -45,14 +45,11 @@ function ResetPassword() {
 
       toast({
         title: 'Success.',
-        description: 'Password reset successfully, redirecting to login page...',
+        description: 'Password reset successfully, you may close this tab now and login again.',
         status: 'success',
         duration: 5000,
         isClosable: true,
       });
-      setTimeout(() => {
-        navigate('/auth/login')
-      }, 2000)
     } catch (error) {
       console.log(error);
       toast({
