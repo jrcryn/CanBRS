@@ -53,8 +53,10 @@ export const createListing = async (req, res) => {
         // Add inventory or address based on type
         if (type === 'equipment') {
             newListing.inventory = inventory;
+            newListing.address = undefined; // Remove address if equipment
         } else if (type === 'facility') {
             newListing.address = address;
+            newListing.inventory = 1; // Default inventory to 1 for facilities
         }
 
         await newListing.save();
@@ -74,41 +76,61 @@ export const createListing = async (req, res) => {
 export const updateListing = async (req, res) => {
     const { id } = req.params;
     const { name, inventory, description, type, address } = req.body;
-
+  
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ success: false, message: 'Invalid Listing Id' });
+      return res.status(404).json({ success: false, message: 'Invalid Listing Id' });
     }
-
+  
     try {
-        const updateData = { name, description, type };
-
+      const updateData = {};
+  
+      if (name !== undefined) updateData.name = name;
+      if (description !== undefined) updateData.description = description;
+  
+      // Only update the type if it's provided
+      if (type) {
+        updateData.type = type;
         if (type === 'equipment') {
-            updateData.inventory = inventory;
-            updateData.address = undefined; // Remove address if switching to equipment
+          updateData.inventory = Number(inventory);
+          updateData.address = undefined;
         } else if (type === 'facility') {
+          updateData.address = address;
+          updateData.inventory = Number(inventory); // Allow setting inventory for facilities
+        }
+      } else {
+        // If type isn't changing, handle inventory or address based on existing type
+        const existingListing = await Listing.findById(id);
+        if (existingListing.type === 'equipment' && inventory !== undefined) {
+          updateData.inventory = Number(inventory);
+        } else if (existingListing.type === 'facility') {
+          if (inventory !== undefined) {
+            updateData.inventory = Number(inventory);
+          }
+          if (address !== undefined) {
             updateData.address = address;
-            updateData.inventory = undefined; // Remove inventory if switching to facility
+          }
         }
-
-        if (req.file) {
-            updateData.image = {
-                data: fs.readFileSync(req.file.path, 'base64'),
-                contentType: req.file.mimetype
-            };
-        }
-
-        const updatedListing = await Listing.findByIdAndUpdate(id, updateData, { new: true });
-
-        if (!updatedListing) {
-            return res.status(404).json({ success: false, message: 'Listing not found' });
-        }
-
-        io.emit('listingUpdated', updatedListing);
-
-        res.status(200).json({ success: true, data: updatedListing });
+      }
+  
+      if (req.file) {
+        updateData.image = {
+          data: fs.readFileSync(req.file.path, 'base64'),
+          contentType: req.file.mimetype,
+        };
+      }
+  
+      const updatedListing = await Listing.findByIdAndUpdate(id, updateData, { new: true });
+  
+      if (!updatedListing) {
+        return res.status(404).json({ success: false, message: 'Listing not found' });
+      }
+  
+      io.emit('listingUpdated', updatedListing);
+  
+      res.status(200).json({ success: true, data: updatedListing });
     } catch (error) {
-        console.error('Error updating listing:', error.message);
-        res.status(500).json({ success: false, message: 'Server Error' });
+      console.error('Error updating listing:', error.message);
+      res.status(500).json({ success: false, message: 'Server Error' });
     }
 };
 

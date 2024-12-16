@@ -72,7 +72,12 @@ function TrackReservationListResident({ reservation }) {
               </Text>
               {reservation.resources.map((item) => (
                 <Text key={item.resourceId._id} color="gray.700" fontSize="sm">
-                  {item.resourceId.name} <strong>x {item.quantity}</strong>
+                  {item.resourceId.name}{' '}
+                  {item.resourceId.type === 'facility' ? (
+                    <> - Address: {item.resourceId.address}</>
+                  ) : (
+                    <strong>x {item.quantity}</strong>
+                  )}
                 </Text>
               ))}
             </VStack>

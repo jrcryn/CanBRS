@@ -69,7 +69,7 @@ export const getAllReservations = async (req, res) => {
       })
       .populate({
         path: 'resources.resourceId',
-        select: '-image -description type address', // Exclude image and description fields
+        select: '-image -description', // Exclude image and description fields
       });
     res.status(200).json({ success: true, data: reservations });
   } catch (error) {
@@ -171,9 +171,9 @@ const adjustInventory = async (
     const statusChangedToApproved =
       originalStatus !== 'Approved' && updatedStatus === 'Approved';
 
-    const statusChangedFromApprovedToCancelledOrDeclined =
+    const statusChangedFromApprovedToCancelledOrDeclinedOrPending =
       originalStatus === 'Approved' &&
-      ['Declined', 'Cancelled'].includes(updatedStatus);
+      ['Declined', 'Cancelled', 'Pending'].includes(updatedStatus);
 
     const statusChangedToInUse =
       originalStatus !== 'In-Use' && updatedStatus === 'In-Use';
@@ -205,7 +205,7 @@ const adjustInventory = async (
       }
     }
     // Handle status change from 'Approved' to 'Declined' or 'Cancelled' (Return inventory)
-    else if (statusChangedFromApprovedToCancelledOrDeclined) {
+    else if (statusChangedFromApprovedToCancelledOrDeclinedOrPending) {
       for (const item of originalResources) {
         const resourceId =
           typeof item.resourceId === 'object'
@@ -242,6 +242,7 @@ const adjustInventory = async (
         await listing.save({ session });
       }
     }
+    
     // Handle status change to 'Returned' from other statuses (e.g., directly from 'Approved')
     else if (statusChangedToReturned) {
       for (const item of originalResources) {

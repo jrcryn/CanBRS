@@ -59,23 +59,36 @@ export const useListingStore = create((set) => ({
       }
     },
 
-    updateListing: async (id, updates) => {
-        set({ isLoading: true });
-        try {
-          const response = await axios.put(`${API_URL}/update-listing/${id}`, updates);
-          const updatedListing = response.data.data;
-          set((state) => ({
-            listing: state.listing.map((listing) =>
-              listing._id === id ? updatedListing : listing
-            ),
-          }));
-          set({ isLoading: false });
-          return updatedListing;
-        } catch (error) {
-          console.error('Error updating listing:', error);
-          set({ isLoading: false });
-          throw error;
+    updateListing: async (id, updates, isFormData) => {
+      set({ isLoading: true });
+      try {
+        let config = {};
+        let dataToSend = updates;
+    
+        if (isFormData) {
+          config = {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          };
         }
+    
+        const response = await axios.put(`${API_URL}/update-listing/${id}`, updates, config);
+        const updatedListing = response.data.data;
+    
+        set((state) => ({
+          listing: state.listing.map((listing) =>
+            listing._id === id ? updatedListing : listing
+          ),
+        }));
+    
+        set({ isLoading: false });
+        return updatedListing;
+      } catch (error) {
+        console.error('Error updating listing:', error);
+        set({ isLoading: false });
+        throw error;
+      }
     },
 
     deleteListing: async (id) => {

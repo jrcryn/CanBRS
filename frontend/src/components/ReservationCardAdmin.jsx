@@ -244,7 +244,7 @@ const maxTime = selectedDate
         if (listingResource.inventory < resource.quantity) {
           toast({
             title: 'Insufficient Inventory',
-            description: `Not enough resource/s to cover the reservation.`,
+            description: `Not enough ${resource.resourceId.name} resource/s to cover the reservation.`,
             status: 'error',
             duration: 5000,
             isClosable: true,
@@ -382,11 +382,12 @@ const maxTime = selectedDate
       const handleAddResource = (event) => {
         const resourceId = event.target.value;
         const resource = localListings.find((item) => item._id === resourceId);
-
+      
         if (resource && !editedResources.some((item) => item.resourceId._id === resourceId)) {
+          const defaultQuantity = resource.type === 'facility' ? 1 : 1; // Ensure quantity is set to 1 for facilities
           setEditedResources((prevResources) => [
             ...prevResources,
-            { resourceId: resource, quantity: 1, originalQuantity: 0 },
+            { resourceId: resource, quantity: defaultQuantity, originalQuantity: resource.type === 'facility' ? 1 : 0 },
           ]);
         }
       };
@@ -692,11 +693,17 @@ const maxTime = selectedDate
                   <VStack align="start" spacing={3} w="full">
                     {reservation.resources.map((item) => (
                       <HStack key={item.resourceId._id} justifyContent="space-between" w="full">
-                        <Text color="gray.700" fontSize="md">{item.resourceId.name}</Text>
-                        <Text color="blue.600" fontWeight="bold">x {item.quantity}</Text>
-                        {item.resourceId.type === 'facility' && item.resourceId.address && (
-                        <Text color="gray.700" fontSize="md">Address: {item.resourceId.address}</Text>
-                      )}
+                        <Text color="gray.700" fontSize="md">
+                          {item.resourceId.name}
+                          {item.resourceId.type === 'facility' && item.resourceId.address && (
+                            <> - {item.resourceId.address}</>
+                          )}
+                        </Text>
+                        {item.resourceId.type !== 'facility' && (
+                          <Text color="blue.600" fontWeight="bold" fontSize="sm">
+                            x {item.quantity}
+                          </Text>
+                        )}
                       </HStack>
                     ))}
                   </VStack>
@@ -704,7 +711,7 @@ const maxTime = selectedDate
               </HStack>
 
               {/* Current Resource Inventory */}
-              <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth='1px'>
+              <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth="1px">
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                   Current Resource/s Inventory
                 </Text>
@@ -712,7 +719,13 @@ const maxTime = selectedDate
                   {reservation.resources.map((item) => (
                     <HStack key={item.resourceId._id} justifyContent="space-between" w="full">
                       <Text color="gray.700" fontSize="md">{item.resourceId.name}</Text>
-                      <Text color="red.500" fontWeight="bold">Available: {item.resourceId.inventory}</Text>
+                      {item.resourceId.type !== 'facility' ? (
+                        <Text color="red.500" fontWeight="bold">Available: {item.resourceId.inventory}</Text>
+                      ) : (
+                        <Text color={item.resourceId.inventory === 0 ? 'red.500' : 'green.500'} fontWeight="bold">
+                          {item.resourceId.inventory === 0 ? 'Not Available' : 'Available'}
+                        </Text>
+                      )}
                     </HStack>
                   ))}
                 </VStack>
@@ -971,8 +984,17 @@ const maxTime = selectedDate
                   <VStack align="start" spacing={3} w="full">
                     {reservation.resources.map((item) => (
                       <HStack key={item.resourceId._id} justifyContent="space-between" w="full">
-                        <Text color="gray.700" fontSize="md">{item.resourceId.name}</Text>
-                        <Text color="blue.600" fontWeight="bold">x {item.quantity}</Text>
+                        <Text color="gray.700" fontSize="md">
+                          {item.resourceId.name}
+                          {item.resourceId.type === 'facility' && item.resourceId.address && (
+                            <> - {item.resourceId.address}</>
+                          )}
+                        </Text>
+                        {item.resourceId.type !== 'facility' && (
+                          <Text color="blue.600" fontWeight="bold" fontSize="sm">
+                            x {item.quantity}
+                          </Text>
+                        )}
                       </HStack>
                     ))}
                   </VStack>
@@ -1153,24 +1175,23 @@ const maxTime = selectedDate
               <VStack spacing={5} align="stretch">
 
                 {/* Current Resource Inventory */}
-                <Box p={4} bg="gray.50" borderRadius="md" borderWidth="1px">
-                  <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={3}>
+                <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth="1px">
+                  <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                     Current Resource/s Inventory
                   </Text>
                   <VStack align="start" spacing={3} w="full">
-                    {editedResources.map((item) => {
-                      const adjustedInventory =
-                        item.resourceId.inventory + item.originalQuantity - item.quantity;
-
-                      return (
-                        <HStack key={item.resourceId._id} justifyContent="space-between" w="full">
-                          <Text color="gray.700" fontSize="md">{item.resourceId.name}</Text>
-                          <Text color="red.500" fontWeight="bold">
-                            Available: {adjustedInventory}
+                    {reservation.resources.map((item) => (
+                      <HStack key={item.resourceId._id} justifyContent="space-between" w="full">
+                        <Text color="gray.700" fontSize="md">{item.resourceId.name}</Text>
+                        {item.resourceId.type !== 'facility' ? (
+                          <Text color="red.500" fontWeight="bold">Available: {item.resourceId.inventory}</Text>
+                        ) : (
+                          <Text color={item.isTaken ? 'red.500' : 'green.500'} fontWeight="bold">
+                            {item.isTaken ? 'Not Available' : 'Available'}
                           </Text>
-                        </HStack>
-                      );
-                    })}
+                        )}
+                      </HStack>
+                    ))}
                   </VStack>
                 </Box>
 
@@ -1185,15 +1206,20 @@ const maxTime = selectedDate
                         <HStack key={item.resourceId._id} spacing={4}>
                           <Text flex="1" fontWeight="medium" color="gray.700">
                             {item.resourceId.name}
+                            {item.resourceId.type === 'facility' && item.resourceId.address && (
+                              <> - {item.resourceId.address}</>
+                            )}
                           </Text>
-                          <Input
-                            type="number"
-                            min={1}
-                            max={item.resourceId.inventory + item.quantity} // Account for original quantity
-                            value={item.quantity}
-                            onChange={(e) => handleQuantityChange(index, e.target.value)}
-                            width="100px"
-                          />
+                          {item.resourceId.type !== 'facility' && (
+                            <Input
+                              type="number"
+                              min={1}
+                              max={item.resourceId.inventory + item.quantity} // Account for original quantity
+                              value={item.quantity}
+                              onChange={(e) => handleQuantityChange(index, e.target.value)}
+                              width="100px"
+                            />
+                          )}
                           <Button
                             size="sm"
                             colorScheme="red"
@@ -1217,6 +1243,9 @@ const maxTime = selectedDate
                       {localListings.map((resource) => (
                         <option key={resource._id} value={resource._id}>
                           {resource.name}
+                          {resource.type === 'facility' 
+                      ? ` - ${resource.address}` 
+                      : resource.name}
                         </option>
                       ))}
                     </Select>
@@ -1370,8 +1399,17 @@ const maxTime = selectedDate
                   <VStack align="start" spacing={3} w="full">
                     {reservation.resources.map((item) => (
                       <HStack key={item.resourceId._id} justifyContent="space-between" w="full">
-                        <Text color="gray.700" fontSize="md">{item.resourceId.name}</Text>
-                        <Text color="blue.600" fontWeight="bold">x {item.quantity}</Text>
+                        <Text color="gray.700" fontSize="md">
+                          {item.resourceId.name}
+                          {item.resourceId.type === 'facility' && item.resourceId.address && (
+                            <> - {item.resourceId.address}</>
+                          )}
+                        </Text>
+                        {item.resourceId.type !== 'facility' && (
+                          <Text color="blue.600" fontWeight="bold" fontSize="sm">
+                            x {item.quantity}
+                          </Text>
+                        )}
                       </HStack>
                     ))}
                   </VStack>
@@ -1379,7 +1417,7 @@ const maxTime = selectedDate
               </HStack>
 
               {/* Current Resource Inventory */}
-              <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth='1px'>
+              <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth="1px">
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                   Current Resource/s Inventory
                 </Text>
@@ -1387,7 +1425,13 @@ const maxTime = selectedDate
                   {reservation.resources.map((item) => (
                     <HStack key={item.resourceId._id} justifyContent="space-between" w="full">
                       <Text color="gray.700" fontSize="md">{item.resourceId.name}</Text>
-                      <Text color="red.500" fontWeight="bold">Available: {item.resourceId.inventory}</Text>
+                      {item.resourceId.type !== 'facility' ? (
+                        <Text color="red.500" fontWeight="bold">Available: {item.resourceId.inventory}</Text>
+                      ) : (
+                        <Text color={item.isTaken ? 'red.500' : 'green.500'} fontWeight="bold">
+                          {item.isTaken ? 'Not Available' : 'Available'}
+                        </Text>
+                      )}
                     </HStack>
                   ))}
                 </VStack>
@@ -1553,18 +1597,24 @@ const maxTime = selectedDate
     
             {/* Current Resource Inventory */}
             <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth="1px">
-              <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
-                Current Resource/s Inventory
-              </Text>
-              <VStack align="start" spacing={3} w="full">
-                {reservation.resources.map((item) => (
-                  <HStack key={item.resourceId._id} justifyContent="space-between" w="full">
-                    <Text color="gray.700" fontSize="md">{item.resourceId.name}</Text>
-                    <Text color="red.500" fontWeight="bold">Available: {item.resourceId.inventory}</Text>
-                  </HStack>
-                ))}
-              </VStack>
-            </Box>
+                <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
+                  Current Resource/s Inventory
+                </Text>
+                <VStack align="start" spacing={3} w="full">
+                  {reservation.resources.map((item) => (
+                    <HStack key={item.resourceId._id} justifyContent="space-between" w="full">
+                      <Text color="gray.700" fontSize="md">{item.resourceId.name}</Text>
+                      {item.resourceId.type !== 'facility' ? (
+                        <Text color="red.500" fontWeight="bold">Available: {item.resourceId.inventory}</Text>
+                      ) : (
+                        <Text color={item.resourceId.inventory === 0 ? 'red.500' : 'green.500'} fontWeight="bold">
+                          {item.resourceId.inventory === 0 ? 'Not Available' : 'Available'}
+                        </Text>
+                      )}
+                    </HStack>
+                  ))}
+                </VStack>
+              </Box>
     
             {/* Purpose */}
             <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth="1px">

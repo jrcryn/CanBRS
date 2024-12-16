@@ -27,36 +27,46 @@ const ListingCardAdmin = ({ listing }) => {
     }));
   };
 
-  const handleUpdate = async () => {
-    const formDataToSend = new FormData();
-    formDataToSend.append('name', formData.name);
-    formDataToSend.append('description', formData.description);
-    formDataToSend.append('type', formData.type);
-
-    if (formData.type === 'equipment') {
-      formDataToSend.append('inventory', formData.inventory);
-    } else if (formData.type === 'facility') {
-      formDataToSend.append('address', formData.address);
-    }
-
-    if (formData.image) {
-      formDataToSend.append('image', formData.image);
-    }
-
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const updates = {};
+  
+    if (formData.name !== listing.name) updates.name = formData.name;
+    if (formData.description !== listing.description) updates.description = formData.description;
+    if (formData.inventory !== listing.inventory) updates.inventory = parseInt(formData.inventory, 10) || 0;
+    if (formData.address !== listing.address) updates.address = formData.address;
+  
+    // Check if an image is being updated
+    const isImageUpdated = !!formData.image;
+  
     try {
-      await updateListing(listing._id, formDataToSend);
-      onClose();
+      if (isImageUpdated) {
+        const form = new FormData();
+        Object.keys(updates).forEach((key) => {
+          if (updates[key] !== undefined) {
+            form.append(key, updates[key]);
+          }
+        });
+        form.append('image', formData.image);
+        await updateListing(listing._id, form, true);
+      } else {
+        await updateListing(listing._id, updates, false);
+      }
+  
       toast({
         title: 'Listing updated.',
         status: 'success',
         duration: 3000,
         isClosable: true,
       });
+      onClose();
     } catch (error) {
+      console.error('Error updating listing:', error);
       toast({
-        title: 'Error updating listing.',
+        title: 'Error',
+        description: error.response?.data?.message || 'Error updating listing.',
         status: 'error',
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
       });
     }
@@ -125,17 +135,25 @@ const ListingCardAdmin = ({ listing }) => {
       </Box>
 
     {/* Edit Listing Modal */}
-    <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered closeOnOverlayClick={false} scrollBehavior='inside'>
+    <Modal isOpen={isOpen} onClose={onClose} size="2xl" isCentered closeOnOverlayClick={false} scrollBehavior="inside">
       <ModalOverlay />
-      <ModalContent borderRadius="md" overflow="hidden" maxHeight='100vh'>
+      <ModalContent display="flex" flexDirection="column" h="95vh" maxH="100vh" borderRadius="lg">
         {/* Header */}
-        <ModalHeader bg="blue.600" color="white" fontSize="xl">
+        <ModalHeader
+          fontWeight="bold"
+          fontSize="xl"
+          color="white"
+          bg="blue.600"
+          px={6}
+          py={4}
+          borderTopRadius="lg"
+        >
           Edit Listing
         </ModalHeader>
 
         {/* Scrollable Content */}
         <form onSubmit={handleUpdate}>
-          <ModalBody bg="gray.50" py={6} flex="1" overflowY="auto">
+          <ModalBody bg="gray.50" py={6} flex="1" overflowY="auto" maxHeight="80vh">
             <VStack spacing={4} align="stretch">
               {/* Listing Name */}
               <FormControl isRequired>
@@ -152,7 +170,7 @@ const ListingCardAdmin = ({ listing }) => {
               </FormControl>
 
               {/* Description */}
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel>Description</FormLabel>
                 <Textarea
                   placeholder="Enter description of the listing"
@@ -168,22 +186,16 @@ const ListingCardAdmin = ({ listing }) => {
               {/* Type Select */}
               <FormControl isRequired>
                 <FormLabel>Type</FormLabel>
-                <Select
-                  placeholder="Select the type of listing"
-                  name="type"
-                  value={formData.type}
-                  onChange={handleChange}
-                  focusBorderColor="blue.400"
-                  bg="white"
+                <Input
+                  value={listing.type === 'equipment' ? 'Equipment' : 'Facility'}
+                  isReadOnly
+                  bg="gray.100"
                   borderColor="gray.300"
-                >
-                  <option value="equipment">Equipment</option>
-                  <option value="facility">Facility</option>
-                </Select>
+                />
               </FormControl>
 
               {/* Inventory or Address Input */}
-              {formData.type === 'equipment' && (
+              {listing.type === 'equipment' && (
                 <FormControl isRequired>
                   <FormLabel>Inventory</FormLabel>
                   <Input
@@ -199,23 +211,38 @@ const ListingCardAdmin = ({ listing }) => {
                 </FormControl>
               )}
 
-              {formData.type === 'facility' && (
-                <FormControl isRequired>
-                  <FormLabel>Address</FormLabel>
-                  <Input
-                    placeholder="Enter facility address"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    focusBorderColor="blue.400"
-                    bg="white"
-                    borderColor="gray.300"
-                  />
-                </FormControl>
+              {listing.type === 'facility' && (
+                <>
+                  <FormControl isRequired>
+                    <FormLabel>Address</FormLabel>
+                    <Input
+                      placeholder="Enter the facility address"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      focusBorderColor="blue.400"
+                      bg="white"
+                      borderColor="gray.300"
+                    />
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel>Inventory</FormLabel>
+                    <Input
+                      placeholder="Enter available inventory"
+                      name="inventory"
+                      type="number"
+                      value={formData.inventory}
+                      onChange={handleChange}
+                      focusBorderColor="blue.400"
+                      bg="white"
+                      borderColor="gray.300"
+                    />
+                  </FormControl>
+                </>
               )}
 
               {/* Image Upload */}
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel>Image</FormLabel>
                 <Input
                   type="file"
@@ -230,7 +257,15 @@ const ListingCardAdmin = ({ listing }) => {
           </ModalBody>
 
           {/* Footer */}
-          <ModalFooter bg="gray.100" position="sticky" bottom="0" justifyContent="space-between">
+          <ModalFooter 
+            justifyContent="space-between" 
+            p={6} 
+            borderTop="1px solid" 
+            borderColor="gray.200" 
+            bg="white"
+            position="sticky" 
+            bottom="0" 
+          >
             <Button colorScheme="blue" type="submit" isLoading={isLoading}>
               Save Changes
             </Button>
@@ -241,6 +276,7 @@ const ListingCardAdmin = ({ listing }) => {
         </form>
       </ModalContent>
     </Modal>
+
 
 
     </>

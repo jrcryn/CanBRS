@@ -28,7 +28,7 @@ import { FaCalendarAlt } from 'react-icons/fa';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const InquireForm = () => {
-  const { listing, fetchListing, isLoading: listingLoading } = useListingStore();
+  const { listingsWithoutImages: listing, fetchListingWithoutImages: fetchListing, isLoading: listingLoading } = useListingStore();
   const { createReservation, isLoading } = useReservationStore();
   const [availableListings, setAvailableListings] = useState([]);
   const [selectedListings, setSelectedListings] = useState([]);
@@ -83,6 +83,10 @@ const InquireForm = () => {
       });
     }
   }, [listing]);
+
+  if (listingLoading) {
+    return <LoadingSpinner />;
+  }
 
   const handleTargetResourceChange = (event) => {
     const resourceId = event.target.value;
@@ -216,7 +220,7 @@ const InquireForm = () => {
                 {availableListings.map((resource) => (
                   <option key={resource._id} value={resource._id}>
                     {resource.type === 'facility' 
-                      ? `${resource.name} (Address: ${resource.address})` 
+                      ? `${resource.name} - ${resource.address}` 
                       : resource.name}
                   </option>
                 ))}
@@ -240,7 +244,7 @@ const InquireForm = () => {
                     >
                       <Text flex="1">
                         {item.resource.type === 'facility'
-                          ? `${item.resource.name} (Address: ${item.resource.address})`
+                          ? `${item.resource.name} - ${item.resource.address}`
                           : item.resource.name}
                       </Text>
                       {item.resource.type !== 'facility' && (
