@@ -16,6 +16,7 @@ import {
   useColorModeValue,
   useToast,
   Link,
+  FormHelperText
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
@@ -295,6 +296,17 @@ function ResidentSignupPage() {
                     name="validIDfront"
                     onChange={handleFileChange}
                   />
+                  <FormHelperText>
+                    For better service, please upload a valid ID that matches your resident classification:
+                    <br />• Senior citizens: Senior Citizen ID
+                    <br />• PWD: PWD ID  
+                    <br />• Pregnant: PWD ID / Other Proof
+                    <br />• Regular resident: Any government-issued ID
+                    <br /><br />
+                    (Accepted formats: JPG, JPEG, PNG)
+                    <br />
+                    (Maximum size: 5MB)
+                  </FormHelperText>
               </FormControl>
             </GridItem>
 
@@ -308,6 +320,14 @@ function ResidentSignupPage() {
                     name="validIDback"
                     onChange={handleFileChange}
                   />
+
+                <FormHelperText>
+                  Please upload a clear photo of the back side of your ID.
+                  <br /><br />
+                  (Accepted formats: JPG, JPEG, PNG)
+                  <br />
+                  (Maximum size: 5MB)
+                </FormHelperText>
               </FormControl>
             </GridItem>
 
@@ -321,6 +341,13 @@ function ResidentSignupPage() {
                     name="selfie"
                     onChange={handleFileChange}
                   />
+                <FormHelperText>
+                  Please upload a recent, clear photo of yourself.
+                  <br /><br />
+                  (Accepted formats: JPG, JPEG, PNG) 
+                  <br />
+                  (Maximum size: 5MB)
+                </FormHelperText>
               </FormControl>
             </GridItem>
 
@@ -338,6 +365,9 @@ function ResidentSignupPage() {
                   value={formData.validIdNumber}
                   onChange={handleChange}
                 />
+                <FormHelperText>
+                  Please enter the number on your valid ID, make sure it's correct.
+                </FormHelperText>
               </FormControl>
             </GridItem>
 
@@ -360,7 +390,7 @@ function ResidentSignupPage() {
                   name="gender"
                   value={formData.gender}
                   onChange={handleChange}
-                  placeholder="Select Gender"
+                  placeholder="Select Sex"
                 >
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -382,6 +412,9 @@ function ResidentSignupPage() {
                   value={formData.phone}
                   onChange={handleChange}
                 />
+                <FormHelperText>
+                  Please enter a valid phone number. It will be used for logging in and for receiving OTP codes and other updates.
+                </FormHelperText>
               </FormControl>
             </GridItem>
             <GridItem colSpan={1}>
@@ -421,8 +454,11 @@ function ResidentSignupPage() {
             >
               Create Account
             </Button>
+            <Text textAlign={'center'} fontSize="sm" color="gray.600">
+              All of the information you provide will be securely stored and used for resident account verification purposes, so make sure they're correct. We will not share your information with any third parties.
+            </Text>
           </Stack>
-          <Stack pt={6}>
+          <Stack pt={4}>
             <Text align="center" fontSize="sm" color="gray.600">
               By signing up, you agree to our{' '}
               <Link color="blue.400" href="/privacy-policy" target="_blank" rel="noopener noreferrer">

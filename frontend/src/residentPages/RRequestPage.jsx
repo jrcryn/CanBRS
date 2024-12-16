@@ -22,6 +22,7 @@ import {
   InputLeftElement,
   List,
   ListItem,
+  FormHelperText,
 } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { FaCalendarAlt } from 'react-icons/fa';
@@ -276,18 +277,20 @@ const InquireForm = () => {
           </GridItem>
 
           {/* Start Date Field */}
-          <GridItem colSpan={{ base: 1, md: 1 }}>
-            <FormControl isRequired>
-              <FormLabel>Start Date</FormLabel>
-              <InputGroup>
-                <InputLeftElement pointerEvents="none" children={<FaCalendarAlt color="gray.300" />} />
-                <Input 
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)} />
-              </InputGroup>
-            </FormControl>
-          </GridItem>
+          <FormControl isRequired>
+            <FormLabel>Start Date</FormLabel>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none" children={<FaCalendarAlt color="gray.300" />} />
+
+              <Input 
+                type="date" 
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)} />
+            </InputGroup>
+            <FormHelperText>
+              Enter the date when you will start using and borrowing the resources.
+            </FormHelperText>
+          </FormControl>
 
           {/* End Date Field */}
           <GridItem colSpan={{ base: 1, md: 1 }}>
@@ -300,6 +303,9 @@ const InquireForm = () => {
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)} />
               </InputGroup>
+              <FormHelperText>
+                Enter the date when you will finish using and borrowing the resources. It can be the same day or one day later.
+              </FormHelperText>
             </FormControl>
           </GridItem>
 
@@ -308,7 +314,7 @@ const InquireForm = () => {
             <FormControl isRequired>
               <FormLabel>Purpose</FormLabel>
               <Input 
-                placeholder="e.g., Birthday Party"
+                placeholder="Purpose for reserving (e.g., Birthday Party)"
                 value={purpose}
                 onChange={(e) => setPurpose(e.target.value)} />
             </FormControl>
