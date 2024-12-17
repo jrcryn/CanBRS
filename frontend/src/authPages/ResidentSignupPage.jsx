@@ -169,7 +169,7 @@ function ResidentSignupPage() {
     <Flex minH={'100vh'} align={'center'} justify={'center'} px={4}>
       <Stack spacing={8} mx={'auto'} w={'full'} maxW={'5xl'} py={12}>
         <Button
-          onClick={() => navigate('/auth/login')}
+          onClick={() => navigate('/auth/resident-login')}
           colorScheme="blue"
           variant="outline"
           position={{ base: 'relative', md: 'absolute' }}
