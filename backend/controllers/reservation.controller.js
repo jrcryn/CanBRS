@@ -143,8 +143,17 @@ export const updateReservationAdmin = async (req, res) => {
       updates,
       { new: true, session }
     )
-      .populate('resident', 'firstname lastname') // Only necessary fields
+      .populate('resident', 'firstname lastname phone') // Only necessary fields
       .populate('resources.resourceId', 'name inventory type address'); // Avoid image data
+
+    if (updates.status === 'Approved' && originalStatus !== 'Approved') {
+      try {
+        await sendReservationRequestApprovedSMS(updatedReservation.resident.phone);
+      } catch (smsError) {
+        console.error('Error sending approval SMS:', smsError);
+        // Continue with the transaction even if SMS fails
+      }
+    }
 
     await session.commitTransaction();
     session.endSession();
