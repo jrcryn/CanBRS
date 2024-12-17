@@ -3,7 +3,6 @@ import Listing from "../models/listing.model.js";
 import fs from 'fs';
 import { io } from '../server.js';
 
-
 // GET listings (working)
 export const getListing = async (req, res) => {
     try {
@@ -69,8 +68,6 @@ export const createListing = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error uploading listing' });
     }
 };
-
-
 
 //UPDATE or PUT listing (working)
 export const updateListing = async (req, res) => {

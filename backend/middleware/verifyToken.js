@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken'
 
-
 export const verifyToken = (req, res, next) => {
     const token = req.cookies.token; //token is the name of the cookie I set in the generateTokenAndSetCookie function
     

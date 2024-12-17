@@ -2,7 +2,6 @@ import UserResident from "../models/userResident.model.js";
 import UserAdmin from "../models/userAdmin.model.js";
 import { sendResidentAccountApprovedSMS, sendResidentAccountDeclinedSMS } from "../semaphore/sms.js";
 
-
 export const getResidents = async (req, res) => {
     try {
       const residents = await UserResident.find();
