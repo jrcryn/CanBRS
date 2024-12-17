@@ -40,11 +40,14 @@ const RTrackReservation = () => {
   }
 
   // Filter reservations based on search query and selected status
-  const filteredReservations = reservation.filter((res) => {
-    const matchesSearch = res._id.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = selectedStatus ? res.status === selectedStatus : true;
-    return matchesSearch && matchesStatus;
-  });
+  const filteredReservations = reservation
+    .filter((res) => {
+      const matchesSearch = res._id.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesStatus = selectedStatus ? res.status === selectedStatus : true;
+      return matchesSearch && matchesStatus;
+    })
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  
 
   return (
     <Container maxW={'container.xl'} py={10}>
