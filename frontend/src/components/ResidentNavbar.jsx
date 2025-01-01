@@ -1,20 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../store/auth';
 
-import {
-  Box,
-  Flex,
-  Text,
-  IconButton,
-  Button,
-  Stack,
-  Collapse,
-  Icon,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  useBreakpointValue,
-  useDisclosure,
+import { Box, Flex, Text, IconButton, Button, Stack, Collapse, Icon, Popover, PopoverTrigger, PopoverContent, useBreakpointValue, useDisclosure,
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,

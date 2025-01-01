@@ -1,20 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Container,
-  VStack,
-  HStack,
-  Text,
-  Alert,
-  AlertIcon,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  IconButton,
-  Box,
+import { Container, VStack, HStack, Text, Alert, AlertIcon, Button, Table, Thead, Tbody, Tr, Th, Td, IconButton, Box,
 } from '@chakra-ui/react';
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 import { useToast } from '@chakra-ui/react';

@@ -1,15 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import {
-  Container,
-  VStack,
-  HStack,
-  Text,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  Alert,
-  AlertIcon,
-  Button,
+import { Container, VStack, HStack, Text, InputGroup, InputLeftElement, Input, Alert, AlertIcon, Button,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { shallow } from 'zustand/shallow';

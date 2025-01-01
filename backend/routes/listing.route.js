@@ -15,10 +15,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-
-
 //we will have all of the end points in this file 
-
 router.get("/listing", getListing);
 
 router.post('/create-listing', upload.single('image'), createListing);

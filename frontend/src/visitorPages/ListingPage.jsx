@@ -2,17 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useListingStore } from "../store/listing";
 import ListingCard from '../components/ListingCardClient';
 import { Link as ReactRouterLink } from 'react-router-dom';
-import { 
-  Container,
-  SimpleGrid,
-  Text,
-  VStack,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  Button,
-  HStack,
-  Select,
+import { Container, SimpleGrid, Text, VStack, InputGroup, InputLeftElement, Input, Button, HStack, Select,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import LoadingSpinner from '../components/LoadingSpinner';

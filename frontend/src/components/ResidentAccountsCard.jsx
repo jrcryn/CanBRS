@@ -1,25 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import {
-  Box,
-  Text,
-  Button,
-  VStack,
-  HStack,
-  Avatar,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-  Image,
-  Select,
-  useToast,
-  Textarea,
-  Alert,
-  AlertIcon,
+import { Box, Text, Button, VStack, HStack, Avatar, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Image, Select, useToast, Textarea, Alert, AlertIcon,
 } from '@chakra-ui/react';
 import { WarningIcon } from '@chakra-ui/icons';
 

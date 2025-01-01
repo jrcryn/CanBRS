@@ -5,8 +5,6 @@ import {useAuthStore} from '../store/auth'
 
 import LoginPage from '../authPages/LoginPage'
 import AdminLoginPage from '../authPages/AdminLoginPage'
-import RegisterAs from '../authPages/RegisterAs'
-// import AdminSignupPage from '../authPages/AdminSignupPage'
 import ResidentSignupPage from '../authPages/ResidentSignupPage'
 import VerifySignup from '../authPages/VerifySignup'
 import ForgotPassword from '../authPages/ForgotPassword'
@@ -60,18 +58,6 @@ function AuthApp() {
             <AdminLoginPage/>
           </RedirectAuthenticatedUser>
         } />
-
-        {/* <Route path='register-as' element={
-          <RedirectAuthenticatedUser>
-            <RegisterAs/>
-          </RedirectAuthenticatedUser>
-          } /> */}
-
-        {/* <Route path='admin-signup' element={
-          <RedirectAuthenticatedUser>
-            <AdminSignupPage/>
-          </RedirectAuthenticatedUser>
-        } /> */}
 
         <Route path='resident-signup' element={
           <RedirectAuthenticatedUser>

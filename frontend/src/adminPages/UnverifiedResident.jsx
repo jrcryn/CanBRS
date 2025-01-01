@@ -1,19 +1,7 @@
-// UnverifiedResidents.jsx
 import React, { useEffect, useState } from 'react';
 import { UseResidentStore } from '../store/residents.js';
 import { useNavigate } from 'react-router-dom';
-import {
-    Container,
-    Text,
-    VStack,
-    HStack,
-    Button,
-    Select,
-    Input,
-    InputGroup,
-    InputLeftElement,
-    Alert,
-    AlertIcon,
+import { Container,Text, VStack, HStack, Button, Select, Input, InputGroup, InputLeftElement, Alert, AlertIcon,
 } from '@chakra-ui/react';
 
 import { Sitios } from '../components/sitios.js';

@@ -3,15 +3,7 @@ import { Link } from 'react-router-dom';
 import ReservationProcess from '../components/ReservationProcess';
 import ReservationStep from '../components/ReservationStep';
 
-import {
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  useBreakpointValue,
-  Box
+import { Button, Flex, Heading, Image, Stack, Text, useBreakpointValue, Box
 } from '@chakra-ui/react'
 
 function HomePage() {

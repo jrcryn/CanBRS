@@ -1,17 +1,7 @@
 // RTrackReservationPage.jsx
 import React, { useEffect, useState } from 'react';
 import { useReservationStore } from '../store/reservation';
-import {
-  Container,
-  Text,
-  VStack,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  HStack,
-  Select,
-  Alert,
-  AlertIcon,
+import { Container, Text, VStack, InputGroup, InputLeftElement, Input, HStack, Select, Alert, AlertIcon,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import ReservationList from '../components/ReservationCardResident';

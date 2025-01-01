@@ -1,13 +1,4 @@
-import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  VStack,
-  Button,
-  Icon,
-  useColorModeValue,
-  Flex,
+import { Box, Container, Heading, Text, VStack, Button, Icon, useColorModeValue, Flex,
 } from '@chakra-ui/react'
 import { CheckCircleIcon } from '@chakra-ui/icons'
 import { useNavigate } from 'react-router-dom'

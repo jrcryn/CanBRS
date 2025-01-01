@@ -1,14 +1,4 @@
-import { 
-  Container,
-  Text,
-  VStack,
-  HStack,
-  Box,
-  Card,
-  CardBody,
-  Heading,
-  Stack,
-  SimpleGrid,
+import {  Container, Text, VStack, HStack, Box, Card, CardBody, Heading, Stack, SimpleGrid,
 } from '@chakra-ui/react';
 
 const resources = [

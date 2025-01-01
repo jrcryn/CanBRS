@@ -1,25 +1,5 @@
 import React, { useEffect, useState, forwardRef } from 'react';
-import {
-  Box,
-  Text,
-  HStack,
-  VStack,
-  Icon,
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-  Flex,
-  Input,
-  Textarea,
-  useToast,
-  FormControl,
-  FormLabel,
-  Select,
+import { Box, Text, HStack, VStack, Icon, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Flex, Input, Textarea, useToast, FormControl, FormLabel, Select,
 } from '@chakra-ui/react';
 import { FaClipboardList, FaUser, FaMapMarkerAlt, FaPhone, FaIdBadge } from 'react-icons/fa';
 import { useReservationStore } from '../store/reservation.js'

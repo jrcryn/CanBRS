@@ -1,15 +1,5 @@
 import React from 'react'
-import {
-  Box,
-  chakra,
-  Container,
-  SimpleGrid,
-  Stack,
-  Text,
-  VisuallyHidden,
-  Input,
-  IconButton,
-  useColorModeValue,
+import { Box, chakra, Container, SimpleGrid, Stack, Text, VisuallyHidden, Input, IconButton, useColorModeValue,
 } from '@chakra-ui/react'
 
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'

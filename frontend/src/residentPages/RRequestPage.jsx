@@ -7,22 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Grid,
-  GridItem,
-  Heading,
-  Text,
-  Select,
-  InputGroup,
-  InputLeftElement,
-  List,
-  ListItem,
-  FormHelperText,
+import { Box, Button, FormControl, FormLabel, Input, Grid, GridItem, Heading, Text, Select, InputGroup, InputLeftElement, List, ListItem, FormHelperText,
 } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { FaCalendarAlt } from 'react-icons/fa';
