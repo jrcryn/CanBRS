@@ -35,7 +35,7 @@ export const sendLoginOtpSMS = async (phone, verificationCode) => {
 
 export const sendReservationRequestApprovedSMS = async (phone) => {
     try {
-        const message = `Your reservation has been approved. For more details login to your resident account, then go to track reservations page.`;
+        const message = `Your reservation has been approved. For more details login, then go to track reservations page.`;
         await sendSMS(phone, message);
         console.log("Reservation confirmation SMS sent successfully");
     } catch (error) {
@@ -43,6 +43,17 @@ export const sendReservationRequestApprovedSMS = async (phone) => {
         throw new Error(`Error sending reservation confirmation SMS: ${error}`);
     }
 };
+
+export const sendReservationRequestDeclinedSMS = async (phone, reason) => {
+    try {
+        const message = `Reservation declined: ${reason}. For more details login, then go to track reservations page.`;
+        await sendSMS(phone, message);
+        console.log("Reservation declined SMS sent successfully");
+    } catch (error) {
+        console.error("Error sending reservation declined SMS:", error);
+        throw new Error(`Error sending reservation declined SMS: ${error}`);
+    }
+}
 
 export const sendResidentAccountApprovedSMS = async (phone) => {
     try {

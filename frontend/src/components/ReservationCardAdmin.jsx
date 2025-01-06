@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
 
 const ReservationCardAdmin = React.memo(
-  (({ isOpen, onOpen, onClose, reservation, bookings, listings }) => {
+  (({ isOpen, onOpen, onClose, reservation, bookings, listings, deleteReservation }) => {
 
   const { updateReservationAdmin } = useReservationStore();
 
@@ -282,7 +282,10 @@ const maxTime = selectedDate
         return;
       }
 
-      await updateReservationAdmin(reservation._id, { status: 'Declined' });
+      await updateReservationAdmin(reservation._id, 
+        { status: 'Declined',
+         adminMessage: adminMessage
+        });
       toast({
         title: 'Reservation request declined.',
         description: 'Reservation request declined successfully, notifying resident now.',
@@ -481,7 +484,7 @@ const maxTime = selectedDate
         onEditClose(); // Close the edit modal
       };
 
-  // Function to handle setting back to pending status from declined status
+  // Function to handle setting back to PENDING status FROM DECLINED status
   const handlePending = async () => {
     event.preventDefault();
     try {
@@ -530,6 +533,30 @@ const maxTime = selectedDate
         duration: 5000,
         isClosable: true,
       })
+    }
+  };
+
+  //Function to DELETE a reservation
+  const handleDeleteReservation = async () => {
+    try {
+      await deleteReservation(reservation._id);
+      toast({
+        title: 'Reservation Deleted',
+        description: 'The reservation has been deleted successfully.',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+      onClose();
+    } catch (error) {
+      console.error('Error deleting reservation:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to delete the reservation.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
@@ -837,10 +864,10 @@ const maxTime = selectedDate
               {/* Admin Message */}
               <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth='1px'>
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
-                  Add. Message
+                  Add. Message / Decline Reason
                 </Text>
                 <Textarea
-                  placeholder='Enter additional message here...'
+                  placeholder='Enter additional message or decline reason here...'
                   value={adminMessage} // Controlled state for the remark
                   onChange={(e) => setAdminMessage(e.target.value)} // Handle change
                   bg="gray.100"
@@ -1473,6 +1500,16 @@ const maxTime = selectedDate
                 </HStack>
               </Box>
 
+              {/* Admin Message */}
+              <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth='1px'>
+                <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
+                  Admin Message
+                </Text>
+                <Text color="gray.700" fontSize="md" bg="gray.100" p={3} borderRadius="md">
+                  {reservation.adminMessage}
+                </Text>
+              </Box> 
+
               {/* Status */}
               <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth='1px'>
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
@@ -1513,6 +1550,9 @@ const maxTime = selectedDate
                 onClick={handlePending}
               >
                 Set Back to Pending
+              </Button>
+              <Button colorScheme="red" onClick={handleDeleteReservation}>
+                Delete Reservation
               </Button>
             </HStack>
             <Button variant="outline" onClick={onClose}>
@@ -1932,7 +1972,10 @@ const maxTime = selectedDate
             </Box>
           </VStack>
         </ModalBody>
-        <ModalFooter p={6}>
+        <ModalFooter justifyContent="space-between" p={6}>
+        <Button colorScheme="red" onClick={handleDeleteReservation}>
+            Delete Reservation
+        </Button>
           <Button variant="outline" onClick={onClose}>
             Close
           </Button>

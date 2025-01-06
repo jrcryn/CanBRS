@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ReturnedResources = () => {
   const reservation = useReservationStore((state) => state.reservation, shallow);
+  const deleteReservationAdmin = useReservationStore((state) => state.deleteReservationAdmin);
   const fetchReservationAdmin = useReservationStore(
     (state) => state.fetchReservationAdmin,
     shallow
@@ -95,6 +96,7 @@ const ReturnedResources = () => {
                 key={res._id}
                 reservation={res}
                 listings={listing}
+                deleteReservation={deleteReservationAdmin}
                 isOpen={openReservationId === res._id}
                 onOpen={() => setOpenReservationId(res._id)}
                 onClose={() => setOpenReservationId(null)}

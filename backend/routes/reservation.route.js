@@ -3,7 +3,8 @@ import {
     createReservation, 
     getAllReservations, 
     getReservationsForResident, 
-    updateReservationAdmin 
+    updateReservationAdmin,
+    deleteReservationAdmin
 } from '../controllers/reservation.controller.js';
 import { verifyToken } from '../middleware/verifyToken.js';
 
@@ -20,6 +21,9 @@ router.get('/reservations', verifyToken, getAllReservations);
 
 // Admin updates a reservation
 router.put('/reservations/:id', verifyToken, updateReservationAdmin);
+
+//Admin deletes a reservation
+router.delete('/reservations/:id', verifyToken, deleteReservationAdmin);
 
 
 export default router;

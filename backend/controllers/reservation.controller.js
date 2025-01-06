@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import ReservationRequest from '../models/reservationRequest.model.js';
 import Listing from '../models/listing.model.js';
 
-import { sendReservationRequestApprovedSMS } from '../semaphore/sms.js';
+import { sendReservationRequestApprovedSMS, sendReservationRequestDeclinedSMS } from '../semaphore/sms.js';
 
 
 import dotenv from 'dotenv';
@@ -96,6 +96,18 @@ export const getReservationsForResident = async (req, res) => {
   }
 };
 
+//Delete reservations for the logged-in admin
+export const deleteReservationAdmin = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await ReservationRequest.findByIdAndDelete(id);
+    res.status(200).json({ success: true, message: 'Reservation deleted' });
+  } catch (error) {
+    console.error('Error deleting reservation:', error);
+    res.status(500).json({ success: false, message: 'Server Error' });
+  }
+};
+
 // Update reservation details (for admin)
 export const updateReservationAdmin = async (req, res) => {
   const session = await mongoose.startSession();
@@ -151,6 +163,15 @@ export const updateReservationAdmin = async (req, res) => {
         await sendReservationRequestApprovedSMS(updatedReservation.resident.phone);
       } catch (smsError) {
         console.error('Error sending approval SMS:', smsError);
+        // Continue with the transaction even if SMS fails
+      }
+    }
+
+    if (updates.status === 'Declined' && originalStatus !== 'Declined') {
+      try {
+        await sendReservationRequestDeclinedSMS(updatedReservation.resident.phone, updates.adminMessage);
+      } catch (smsError) {
+        console.error('Error sending declined SMS:', smsError);
         // Continue with the transaction even if SMS fails
       }
     }

@@ -10,7 +10,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 
 const RTrackReservation = () => {
   
-  const {  reservation, fetchReservationAdmin, error, isLoading: reservationLoading } = useReservationStore();
+  const {  reservation, fetchReservationAdmin, error, isLoading: reservationLoading, deleteReservationAdmin } = useReservationStore();
 
   const { listingsWithoutImages, fetchListingWithoutImages, isLoading: listingLoading } = useListingStore();
 
@@ -151,6 +151,7 @@ const RTrackReservation = () => {
                   reservation={res}
                   bookings={bookedTimesByDate} // Pass booked times
                   listings={listingsWithoutImages}       // Pass listings
+                  deleteReservation={deleteReservationAdmin}
                   isOpen={openReservationId === res._id}
                   onOpen={() => setOpenReservationId(res._id)}
                   onClose={() => setOpenReservationId(null)}
@@ -179,6 +180,7 @@ const RTrackReservation = () => {
                   reservation={res}
                   bookings={bookedTimesByDate}
                   listings={listingsWithoutImages}
+                  deleteReservation={deleteReservationAdmin}
                   isOpen={openReservationId === res._id}
                   onOpen={() => setOpenReservationId(res._id)}
                   onClose={() => setOpenReservationId(null)}
