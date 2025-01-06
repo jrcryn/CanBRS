@@ -2,7 +2,7 @@ import { Box, Heading, Image, Text, Badge, Divider, Spacer } from '@chakra-ui/re
 import React from 'react';
 
 const ListingCard = ({ listing }) => {
-  const isAvailable = listing.type === 'equipment' ? listing.inventory > 0 : true;
+  const isAvailable = listing.inventory ? true : false;
   const type = listing.type === 'equipment' ? 'Equipment' : 'Facility';
 
   return (

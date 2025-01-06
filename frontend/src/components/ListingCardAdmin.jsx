@@ -23,7 +23,7 @@ const ListingCardAdmin = ({ listing }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === 'inventory' ? parseInt(value, 10) || '' : value,
+      [name]: name === 'inventory' ? (value === '' ? '' : parseInt(value, 10)) : value,
     }));
   };
 
@@ -72,7 +72,7 @@ const ListingCardAdmin = ({ listing }) => {
     }
   };
 
-  const isAvailable = listing.type === 'equipment' ? listing.inventory > 0 : true;
+  const isAvailable = listing.inventory ? true : false;
   const type = listing.type === 'equipment' ? 'Equipment' : 'Facility';
 
   return (
