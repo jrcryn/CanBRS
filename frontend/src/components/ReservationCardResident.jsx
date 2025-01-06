@@ -165,15 +165,43 @@ function TrackReservationListResident({ reservation }) {
             Admin Remarks
           </ModalHeader>
           <ModalBody py={6} px={8}>
+            <Text fontWeight="bold" fontSize="md" mb={2}>
+              Add. Message</Text>
             <Text
               color="gray.700"
               fontSize="md"
               bg="gray.100"
-              p={4}
+              p={3}
               borderRadius="md"
               lineHeight="tall"
             >
               {reservation.adminMessage || "No remarks available."}
+            </Text>
+            <Text fontWeight="bold" fontSize="md" mt={4} mb={2}>
+              Initial Remarks
+            </Text>
+            <Text
+              color="gray.700"
+              fontSize="md"
+              bg="gray.100"
+              p={3}
+              borderRadius="md"
+              lineHeight="tall"
+            >
+              {reservation.initialRemarks || "No remarks available."}
+            </Text>
+            <Text fontWeight="bold" fontSize="md" mt={4} mb={2}>
+              Returned Remarks
+            </Text>
+            <Text
+              color="gray.700"
+              fontSize="md"
+              bg="gray.100"
+              p={3}
+              borderRadius="md"
+              lineHeight="tall"
+            >
+              {reservation.returnedRemarks || "No remarks available."}
             </Text>
           </ModalBody>
           <ModalFooter
