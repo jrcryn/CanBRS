@@ -81,13 +81,8 @@ const UnverifiedResidents = () => {
             </Select>
 
             {/* Go Back Button */}
-            <Button 
-            colorScheme="Blue" 
-            onClick={() => navigate('/admin/resident-accounts')}
-            bg={'blue.500'}
-            variant="outline"
-            >
-                ← Go Back
+            <Button colorScheme="blue" variant="outline" onClick={() => navigate('/admin/resident-accounts')}>
+              ← Go Back
             </Button>
           </HStack>
         </HStack>

@@ -1054,6 +1054,16 @@ const maxTime = selectedDate
                 </HStack>
               </Box>
 
+              {/* Admin Message */}
+              <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth='1px'>
+                <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
+                  Admin Message
+                </Text>
+                <Text color="gray.700" fontSize="md" bg="gray.100" p={3} borderRadius="md">
+                  {reservation.adminMessage}
+                </Text>
+              </Box> 
+
               {/* Initial Remarks */}
               <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth='1px'>
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
@@ -1070,6 +1080,7 @@ const maxTime = selectedDate
                   p={3}
                 />
               </Box>
+ 
 
               {/* Status */}
               <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth='1px'>
@@ -1712,7 +1723,7 @@ const maxTime = selectedDate
       </Modal>
       )}
 
-      {/* Modal popup for In-Use reservation requests */}
+      {/* Modal popup for Returned reservation requests */}
       {reservation.status === 'Returned' && (
       <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered scrollBehavior="inside" closeOnOverlayClick={false}>
       <ModalOverlay />

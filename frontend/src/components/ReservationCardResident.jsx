@@ -9,10 +9,20 @@ import {
   Icon,
   Wrap,
   WrapItem,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { FaCalendarAlt, FaClipboardList, FaClock } from 'react-icons/fa';
 
 function TrackReservationListResident({ reservation }) {
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const getStatusColor = (status) => {
     switch (status) {
       case 'Pending':
@@ -39,12 +49,20 @@ function TrackReservationListResident({ reservation }) {
     >
       <VStack align="start" spacing={4}>
         {/* Header */}
+        <HStack spacing={2} align="center" justify="space-between" w="full">
         <HStack spacing={2} align="center">
           <Icon as={FaClipboardList} color="blue.500" boxSize={4} />
           <Text fontWeight="bold" fontSize="md" color="blue.600">
             Reservation ID: {reservation._id}
           </Text>
         </HStack>
+        
+        {reservation.adminMessage && (
+          <Button colorScheme="blue" variant='outline' size="sm" onClick={onOpen}>
+            Admin Remarks
+          </Button>
+        )}
+      </HStack>
 
         {/* Requested At Date */}
         <HStack spacing={2} align="center" mt={-1}>
@@ -130,6 +148,57 @@ function TrackReservationListResident({ reservation }) {
             </Badge>
           </WrapItem>
         </Wrap>
+
+        {/* Admin Remarks Modal */}
+        <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
+        <ModalOverlay />
+        <ModalContent borderRadius="lg" shadow="lg" bg="white">
+          <ModalHeader
+            fontWeight="bold"
+            fontSize="xl"
+            color="white"
+            bg="blue.600"
+            px={6}
+            py={4}
+            borderTopRadius="lg"
+          >
+            Admin Remarks
+          </ModalHeader>
+          <ModalBody py={6} px={8}>
+            <Text
+              color="gray.700"
+              fontSize="md"
+              bg="gray.100"
+              p={4}
+              borderRadius="md"
+              lineHeight="tall"
+            >
+              {reservation.adminMessage || "No remarks available."}
+            </Text>
+          </ModalBody>
+          <ModalFooter
+            justifyContent="flex-end"
+            py={4}
+            px={8}
+            borderTopWidth="1px"
+            borderColor="gray.200"
+          >
+            <Button
+              colorScheme="blue"
+              size="md"
+              borderRadius="md"
+              px={6}
+              onClick={onClose}
+              _hover={{ bg: "blue.600" }}
+            >
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+
+
       </VStack>
     </Box>
   );
