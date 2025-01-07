@@ -16,6 +16,7 @@ import UnverifiedResidents from '../adminPages/UnverifiedResident'
 import RegistrationKey from '../adminPages/RegistrationKey'
 import AdminSignupPage from '../adminPages/AdminSignupPage'
 import LoadingSpinner from '../components/LoadingSpinner'
+import AdminLogs from '../adminPages/AdminLogs'
 
 //protect routes that require authentication
 const ProtectedRoute = ({children}) => {
@@ -56,6 +57,7 @@ function AdminApp() {
         <Route path='resident-accounts' element={<ResidentAccounts />}/>
         <Route path='unverified-residents' element={<UnverifiedResidents />}/>
         <Route path='registration-key' element={<RegistrationKey />}/>
+        <Route path='admin-logs' element={<AdminLogs />}/>
       </Routes>
       </Layout>
       </ProtectedRoute>

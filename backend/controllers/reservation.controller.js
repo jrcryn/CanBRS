@@ -234,7 +234,7 @@ const adjustInventory = async (
         await listing.save({ session });
       }
     }
-    // Handle status change from 'Approved' to 'Declined' or 'Cancelled' (Return inventory)
+    // Handle status change from 'Approved' to 'Declined' or 'Cancelled' or 'Pending' (Return inventory)
     else if (statusChangedFromApprovedToCancelledOrDeclinedOrPending) {
       for (const item of originalResources) {
         const resourceId =
@@ -273,7 +273,7 @@ const adjustInventory = async (
       }
     }
     
-    // Handle status change to 'Returned' from other statuses (e.g., directly from 'Approved')
+    // Handle status change to 'Returned' from other statuses (e.g., directly from 'In-Use')
     else if (statusChangedToReturned) {
       for (const item of originalResources) {
         const resourceId =

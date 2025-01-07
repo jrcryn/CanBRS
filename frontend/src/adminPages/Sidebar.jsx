@@ -133,6 +133,21 @@ const Dashboard = () => {
       >
         Registration Key
       </Button>
+      
+      <Button
+        as={Link}
+        to="/admin/admin-logs"
+        color={'white'}
+        leftIcon={<Icon as={FaKey} />}
+        justifyContent="flex-start"
+        variant="ghost"
+        fontWeight="normal"  
+        _hover={{ bg: 'white', color: 'blue.600' }}
+        mb={2}
+        borderRadius="md"
+      >
+        Logs
+      </Button>
 
       {/* Log Out Button */}
       <Button
