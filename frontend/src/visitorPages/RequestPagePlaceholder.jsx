@@ -27,7 +27,7 @@ const RequestPagePlaceholder = () => {
           spacing={4}
           justify="center"
         >
-          <Button as={Link} to="/auth/login" colorScheme="blue">
+          <Button as={Link} to="/auth/resident-login" colorScheme="blue">
             Log In
           </Button>
           <Button as={Link} to="/auth/resident-signup" colorScheme="blue" variant="outline">
