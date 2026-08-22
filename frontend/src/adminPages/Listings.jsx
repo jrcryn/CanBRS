@@ -30,20 +30,8 @@ const Listings = () => {
   const handleAddListing = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('name', newListing.name);
-    formData.append('description', newListing.description);
-    formData.append('type', newListing.type);
-    formData.append('image', newListing.image);
-
-    if (newListing.type === 'equipment') {
-      formData.append('inventory', newListing.inventory);
-    } else if (newListing.type === 'facility') {
-      formData.append('address', newListing.address);
-    }
-
     try {
-      await createListing(formData);
+      await createListing(newListing);
       toast({
         title: 'Listing created.',
         description: 'The new listing has been successfully created.',
@@ -57,7 +45,7 @@ const Listings = () => {
         description: '',
         inventory: '',
         address: '',
-        image: null,
+        image: '',
         type: '',
       });
       onClose();
@@ -241,11 +229,12 @@ const Listings = () => {
 
             {/* Image Upload */}
             <FormControl isRequired>
-              <FormLabel>Image</FormLabel>
+              <FormLabel>Image URL</FormLabel>
               <Input
-                type="file"
-                accept="image/*"
-                onChange={(e) => setNewListing({ ...newListing, image: e.target.files[0] })}
+                type="url"
+                placeholder="Enter image URL"
+                value={newListing.image || ''}
+                onChange={(e) => setNewListing({ ...newListing, image: e.target.value })}
                 focusBorderColor="blue.400"
                 bg="white"
                 borderColor="gray.300"

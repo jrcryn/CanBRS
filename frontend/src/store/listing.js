@@ -59,21 +59,10 @@ export const useListingStore = create((set) => ({
       }
     },
 
-    updateListing: async (id, updates, isFormData) => {
+    updateListing: async (id, updates) => {
       set({ isLoading: true });
       try {
-        let config = {};
-        let dataToSend = updates;
-    
-        if (isFormData) {
-          config = {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          };
-        }
-    
-        const response = await axios.put(`${API_URL}/update-listing/${id}`, updates, config);
+        const response = await axios.put(`${API_URL}/update-listing/${id}`, updates);
         const updatedListing = response.data.data;
     
         set((state) => ({

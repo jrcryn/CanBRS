@@ -16,7 +16,7 @@ const ListingCardAdmin = ({ listing }) => {
     inventory: listing.inventory,
     address: listing.address,
     type: listing.type,
-    image: null,
+    image: listing.image || '',
   });
 
   const handleChange = (e) => {
@@ -40,18 +40,8 @@ const ListingCardAdmin = ({ listing }) => {
     const isImageUpdated = !!formData.image;
   
     try {
-      if (isImageUpdated) {
-        const form = new FormData();
-        Object.keys(updates).forEach((key) => {
-          if (updates[key] !== undefined) {
-            form.append(key, updates[key]);
-          }
-        });
-        form.append('image', formData.image);
-        await updateListing(listing._id, form, true);
-      } else {
-        await updateListing(listing._id, updates, false);
-      }
+      if (isImageUpdated) updates.image = formData.image;
+      await updateListing(listing._id, updates);
   
       toast({
         title: 'Listing updated.',
@@ -93,11 +83,7 @@ const ListingCardAdmin = ({ listing }) => {
           <Image
             boxSize="150px"
             objectFit="cover"
-            src={
-              listing.image && listing.image.contentType
-                ? `data:${listing.image.contentType};base64,${listing.image.data}`
-                : 'placeholder-image-url' // Replace with an actual placeholder image URL
-            }
+            src={listing.image || 'placeholder-image-url'}
             alt={listing.name}
             borderRadius="md"
           />
@@ -243,11 +229,13 @@ const ListingCardAdmin = ({ listing }) => {
 
               {/* Image Upload */}
               <FormControl>
-                <FormLabel>Image</FormLabel>
+                <FormLabel>Image URL</FormLabel>
                 <Input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })}
+                  type="url"
+                  placeholder="Enter image URL"
+                  name="image"
+                  value={formData.image}
+                  onChange={handleChange}
                   focusBorderColor="blue.400"
                   bg="white"
                   borderColor="gray.300"

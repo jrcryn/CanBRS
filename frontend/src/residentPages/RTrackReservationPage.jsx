@@ -40,8 +40,8 @@ const RTrackReservation = () => {
   
 
   return (
-    <Container maxW={'container.xl'} py={10}>
-      <VStack spacing={8}>
+    <Container maxW={'container.xl'} py={{ base: 6, md: 10 }} px={{ base: 4, md: 8 }}>
+      <VStack spacing={{ base: 6, md: 8 }}>
 
         {/* Header Section */}
         <Stack direction={{ base: 'column', md: 'row' }} justifyContent="space-between" w="full" mb={8} spacing={4}>
@@ -51,7 +51,7 @@ const RTrackReservation = () => {
           </Text>
 
           {/* Search and Sort */}
-          <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
+          <Stack direction={{ base: 'column', md: 'row' }} spacing={4} w={{ base: 'full', md: 'auto' }}>
             <InputGroup width={{ base: 'full', md: '250px' }}>
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.400" />
