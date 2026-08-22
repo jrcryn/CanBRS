@@ -1,9 +1,8 @@
 import React from 'react'
-import { Box, chakra, Container, SimpleGrid, Stack, Text, VisuallyHidden, Input, IconButton, useColorModeValue,
+import { Box, chakra, Container, SimpleGrid, Stack, Text, VisuallyHidden, useColorModeValue,
 } from '@chakra-ui/react'
-
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
-import { BiMailSend } from 'react-icons/bi'
+import { Link as RouterLink } from 'react-router-dom'
+import { FaInstagram, FaTwitter, FaFacebook } from 'react-icons/fa'
 
 const SocialButton = ({ children, label, href }) => {
   return (
@@ -41,82 +40,49 @@ export default function Footer() {
   return (
     <Box bg={useColorModeValue('gray.50', 'gray.900')} color={useColorModeValue('gray.700', 'gray.200')}>
       <Container as={Stack} maxW={'6xl'} py={10}>
-        <SimpleGrid templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }} spacing={8}>
+        <SimpleGrid templateColumns={{ base: '1fr', sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }} spacing={8}>
           <Stack spacing={6}>
             <Box>
-              <Text fontSize={'2xl'} fontWeight={'bold'}>
+              <Text fontSize={'2xl'} fontWeight={'bold'} color={'blue.500'}>
                 CanBRS
               </Text>
+              <Text fontSize={'sm'} color={'gray.500'} mt={1}>
+                Canlubang Booking and Reservation System
+              </Text>
             </Box>
-            <Text fontSize={'sm'}>© {new Date().getFullYear()} CanBRS. All rights reserved</Text>
-            <Stack direction={'row'} spacing={6}>
-              <SocialButton label={'Twitter'} href={'https://twitter.com'}>
-                <FaTwitter />
-              </SocialButton>
-              <SocialButton label={'YouTube'} href={'https://youtube.com'}>
-                <FaYoutube />
-              </SocialButton>
-              <SocialButton label={'Instagram'} href={'https://instagram.com'}>
-                <FaInstagram />
-              </SocialButton>
-            </Stack>
+            <Text fontSize={'sm'}>© {new Date().getFullYear()} Barangay Canlubang. All rights reserved.</Text>
           </Stack>
           <Stack align={'flex-start'}>
-            <ListHeader>Company</ListHeader>
-            <Box as="a" href={'#'}>
-              About us
+            <ListHeader>Quick Links</ListHeader>
+            <Box as={RouterLink} to={'/'} _hover={{ textDecoration: 'none', color: 'blue.500' }}>
+              Home
             </Box>
-            <Box as="a" href={'#'}>
-              Blog
+            <Box as={RouterLink} to={'/listing'} _hover={{ textDecoration: 'none', color: 'blue.500' }}>
+              Availabilities
             </Box>
-            <Box as="a" href={'#'}>
-              Contact us
+            <Box as={RouterLink} to={'/request-form'} _hover={{ textDecoration: 'none', color: 'blue.500' }}>
+              Inquire
             </Box>
-            <Box as="a" href={'#'}>
-              Pricing
-            </Box>
-            <Box as="a" href={'#'}>
-              Testimonials
+            <Box as={RouterLink} to={'/reservation-policies'} _hover={{ textDecoration: 'none', color: 'blue.500' }}>
+              Reservation Policies
             </Box>
           </Stack>
           <Stack align={'flex-start'}>
-            <ListHeader>Support</ListHeader>
-            <Box as="a" href={'#'}>
-              Help Center
-            </Box>
-            <Box as="a" href={'#'}>
-              Terms of Service
-            </Box>
-            <Box as="a" href={'#'}>
-              Legal
-            </Box>
-            <Box as="a" href={'#'}>
-              Privacy Policy
-            </Box>
-            <Box as="a" href={'#'}>
-              Status
+            <ListHeader>Resources</ListHeader>
+            <Box as={RouterLink} to={'/urgent-needs'} _hover={{ textDecoration: 'none', color: 'blue.500' }}>
+              Urgent Needs
             </Box>
           </Stack>
           <Stack align={'flex-start'}>
-            <ListHeader>Stay up to date</ListHeader>
-            <Stack direction={'row'}>
-              <Input
-                placeholder={'Your email address'}
-                bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-                border={0}
-                _focus={{
-                  bg: 'whiteAlpha.300',
-                }}
-              />
-              <IconButton
-                bg={useColorModeValue('green.400', 'green.800')}
-                color={useColorModeValue('white', 'gray.800')}
-                _hover={{
-                  bg: 'green.600',
-                }}
-                aria-label="Subscribe"
-                icon={<BiMailSend />}
-              />
+            <ListHeader>Contact Us</ListHeader>
+            <Stack spacing={2}>
+              <Text fontSize={'sm'}>
+                Barangay Hall, Canlubang,<br />
+                Calamba City, Laguna
+              </Text>
+              <Text fontSize={'sm'}>
+                Phone: (123) 456-7890
+              </Text>
             </Stack>
           </Stack>
         </SimpleGrid>

@@ -17,10 +17,11 @@ const RequestPagePlaceholder = () => {
         px={{ base: 6, md: 8 }}
       >
         <Heading as="h2" size={useBreakpointValue({ base: 'lg', md: 'xl' })} mb={4}>
-          Oops... But first,
+          Authentication Required
         </Heading>
         <Text fontSize={useBreakpointValue({ base: 'md', md: 'lg' })} mb={6}>
-        You need to create a resident account or log in to request a resource reservation with the barangay.        </Text>
+          To ensure the security and proper scheduling of our community resources, you need to log in or create a resident account to submit a reservation request.
+        </Text>
         <Stack
           direction={{ base: 'column', sm: 'row' }}
           spacing={4}

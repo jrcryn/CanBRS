@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useListingStore } from "../store/listing";
 import ListingCard from '../components/ListingCardClient';
 import { Link as ReactRouterLink } from 'react-router-dom';
-import {  Container, SimpleGrid, Text, VStack, InputGroup, InputLeftElement, Input, Button, HStack, Select,
+import {  Container, SimpleGrid, Text, VStack, InputGroup, InputLeftElement, Input, Button, Stack, Select,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -32,14 +32,14 @@ const ListingPage = () => {
       <VStack spacing={8}>
 
         {/* Header Section */}
-        <HStack justifyContent="space-between" w="full" mb={8} flexWrap="wrap">
+        <Stack direction={{ base: 'column', md: 'row' }} justifyContent="space-between" w="full" mb={8} spacing={4}>
           {/* Title */}
           <Text fontSize={{ base: '3xl', md: '4xl' }} fontWeight={'bold'} color={'blue.600'}>
             Equipment and Facilities
           </Text>
 
           {/* Search, Sort, and Inquire Button */}
-          <HStack spacing={4} flexWrap="wrap">
+          <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <InputGroup width={{ base: 'full', md: '250px' }}>
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.400" />
@@ -67,8 +67,8 @@ const ListingPage = () => {
             <Button colorScheme="blue" variant="solid" width={{ base: 'full', md: '100px' }} as={ReactRouterLink} to="/resident/request-form">
               Inquire
             </Button>
-          </HStack>
-        </HStack>
+          </Stack>
+        </Stack>
 
         {/* Main Listing Grid */}
         <SimpleGrid

@@ -1,7 +1,7 @@
 // RTrackReservationPage.jsx
 import React, { useEffect, useState } from 'react';
 import { useReservationStore } from '../store/reservation';
-import { Container, Text, VStack, InputGroup, InputLeftElement, Input, HStack, Select, Alert, AlertIcon,
+import { Container, Text, VStack, InputGroup, InputLeftElement, Input, Stack, Select, Alert, AlertIcon,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import ReservationList from '../components/ReservationCardResident';
@@ -44,14 +44,14 @@ const RTrackReservation = () => {
       <VStack spacing={8}>
 
         {/* Header Section */}
-        <HStack justifyContent="space-between" w="full" mb={8} flexWrap="wrap">
+        <Stack direction={{ base: 'column', md: 'row' }} justifyContent="space-between" w="full" mb={8} spacing={4}>
           {/* Title */}
           <Text fontSize={{ base: '3xl', md: '4xl' }} fontWeight={'bold'} color={'blue.600'}>
             My Reservations
           </Text>
 
           {/* Search and Sort */}
-          <HStack spacing={4} flexWrap="wrap">
+          <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <InputGroup width={{ base: 'full', md: '250px' }}>
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.400" />
@@ -76,8 +76,8 @@ const RTrackReservation = () => {
               <option value="Approved">Approved</option>
               <option value="Declined">Declined</option>
             </Select>
-          </HStack>
-        </HStack>
+          </Stack>
+        </Stack>
 
         {/* Reservation List */}
         {filteredReservations.length === 0 ? (
