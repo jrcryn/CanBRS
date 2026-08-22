@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import {
-  Container, VStack, HStack, Text, Box, Divider, InputGroup, InputLeftElement, Input, Alert, AlertIcon, Button,
+  Container, VStack, HStack, Text, Box, Divider, InputGroup, InputLeftElement, Input, Alert, AlertIcon, Button, Stack
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { shallow } from 'zustand/shallow';
@@ -94,12 +94,12 @@ const InUsePage = () => {
     <Container maxW={'container.xl'} py={5}>
       <VStack spacing={4}>
         {/* Header Section */}
-        <HStack justifyContent="space-between" w="full" mb={8} flexWrap="wrap">
+        <Stack direction={{ base: 'column', md: 'row' }} justifyContent="space-between" w="full" mb={8} flexWrap="wrap">
           {/* Title */}
           <Text fontSize={{ base: '3xl', md: '3xl' }} fontWeight={'bold'} color={'blue.600'}>
             In-Use Reservations
           </Text>
-          <HStack>
+          <Stack direction={{ base: 'column', md: 'row' }} w={{ base: 'full', md: 'auto' }}>
           {/* Search */}
           <InputGroup width={{ base: 'full', md: '250px' }}>
             <InputLeftElement pointerEvents="none">
@@ -114,11 +114,11 @@ const InUsePage = () => {
             />
           </InputGroup>
           
-          <Button colorScheme="blue"	onClick={() => navigate('/admin/returned-resources')}>
+          <Button w={{ base: 'full', md: 'auto' }} colorScheme="blue"	onClick={() => navigate('/admin/returned-resources')}>
               Returned Resources
           </Button>
-          </HStack>
-        </HStack>
+          </Stack>
+        </Stack>
 
         {/* End Dates and Past */}
         <Box w="full" bg="red.50" p={5} borderRadius="md" borderWidth="5px">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, VStack, HStack, Text, Alert, AlertIcon, Button, Input, InputGroup, InputLeftElement, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Select, Textarea, useDisclosure, useToast, FormControl, FormLabel,
+import { Container, VStack, HStack, Text, Alert, AlertIcon, Button, Input, InputGroup, InputLeftElement, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Select, Textarea, useDisclosure, useToast, FormControl, FormLabel, Stack
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { useListingStore } from '../store/listing';
@@ -96,13 +96,13 @@ const Listings = () => {
     <Container maxW="container.xl" py={5}>
       <VStack spacing={4}>
         {/* Header Section */}
-        <HStack justifyContent="space-between" w="full" mb={8} flexWrap="wrap">
+        <Stack direction={{ base: 'column', md: 'row' }} justifyContent="space-between" w="full" mb={8} flexWrap="wrap">
           {/* Title */}
           <Text fontSize="3xl" fontWeight="bold" color="blue.600">
             Equipments and Resources
           </Text>
 
-          <HStack>
+          <Stack direction={{ base: 'column', md: 'row' }} w={{ base: 'full', md: 'auto' }}>
           <InputGroup width={{ base: 'full', md: '250px' }}>
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.400" />
@@ -128,11 +128,11 @@ const Listings = () => {
           </Select>
 
           {/* Add New Listing Button */}
-          <Button colorScheme="blue" onClick={onOpen}>
+          <Button w={{ base: 'full', md: 'auto' }} colorScheme="blue" onClick={onOpen}>
               Add New Listing
           </Button>
-          </HStack>
-        </HStack>
+          </Stack>
+        </Stack>
 
         {/* Listings */}
         <VStack spacing={4} w="full">
@@ -151,7 +151,7 @@ const Listings = () => {
     </Container>
 
   {/* Modal for creating new listings */}
-  <Modal isOpen={isOpen} onClose={onClose} size="md" isCentered closeOnOverlayClick={false}>
+  <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'full', md: 'md' }} isCentered closeOnOverlayClick={false}>
     <ModalOverlay />
     <ModalContent borderRadius="md" overflow="hidden">
       {/* Header */}

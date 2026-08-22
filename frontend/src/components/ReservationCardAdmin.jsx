@@ -1,5 +1,5 @@
 import React, { useEffect, useState, forwardRef } from 'react';
-import { Box, Text, HStack, VStack, Icon, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Flex, Input, Textarea, useToast, FormControl, FormLabel, Select,
+import { Box, Text, HStack, VStack, Icon, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Flex, Input, Textarea, useToast, FormControl, FormLabel, Select, Stack
 } from '@chakra-ui/react';
 import { FaClipboardList, FaUser, FaMapMarkerAlt, FaPhone, FaIdBadge } from 'react-icons/fa';
 import { useReservationStore } from '../store/reservation.js'
@@ -647,7 +647,7 @@ const maxTime = selectedDate
 
       {/* Modal popup for pending reservation requests */}
       {reservation.status === 'Pending' && (
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered scrollBehavior="inside" closeOnOverlayClick={false}>
+      <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'full', md: '3xl' }} isCentered scrollBehavior="inside" closeOnOverlayClick={false}>
         <ModalOverlay/>
         <ModalContent h="95vh" maxH="100vh" borderRadius="lg">
           <ModalHeader
@@ -664,9 +664,9 @@ const maxTime = selectedDate
           <ModalBody p={6}>
             <VStack align="start" spacing={4} w="full">
               {/* Resident and Resources */}
-              <HStack align="start" spacing={6} w="full">
+              <Stack direction={{ base: 'column', md: 'row' }} align="start" spacing={6} w="full">
                 {/* Resident Details */}
-                <Box p={4} bg="gray.50" w="50%" borderRadius="md" borderWidth='1px'>
+                <Box p={4} bg="gray.50" w={{ base: 'full', md: '50%' }} borderRadius="md" borderWidth='1px'>
                   <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                     Resident Info
                   </Text>
@@ -693,7 +693,7 @@ const maxTime = selectedDate
                 </Box>
 
                 {/* Resources */}
-                <Box p={4} bg="gray.50" w="50%" borderRadius="md" borderWidth='1px'>
+                <Box p={4} bg="gray.50" w={{ base: 'full', md: '50%' }} borderRadius="md" borderWidth='1px'>
                   <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                     Resource/s
                   </Text>
@@ -715,7 +715,7 @@ const maxTime = selectedDate
                     ))}
                   </VStack>
                 </Box>
-              </HStack>
+              </Stack>
 
               {/* Current Resource Inventory */}
               <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth="1px">
@@ -841,8 +841,8 @@ const maxTime = selectedDate
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                   Date/s Needed
                 </Text>
-                <HStack w='full' spacing={4}>
-                  <VStack align="start" w='50%'>
+                <Stack direction={{ base: 'column', md: 'row' }} w='full' spacing={4}>
+                  <VStack align="start" w={{ base: 'full', md: '50%' }}>
                     <Text  color="gray.600" fontSize="md">
                       Start Date:
                     </Text>
@@ -850,7 +850,7 @@ const maxTime = selectedDate
                       {new Date(reservation.startDate).toLocaleDateString()}
                     </Text>
                   </VStack>
-                  <VStack align="start" w='50%'>
+                  <VStack align="start" w={{ base: 'full', md: '50%' }}>
                     <Text  color="gray.600" fontSize="md">
                       End Date:
                     </Text>
@@ -858,7 +858,7 @@ const maxTime = selectedDate
                       {new Date(reservation.endDate).toLocaleDateString()}
                     </Text>
                   </VStack>
-                </HStack>
+                </Stack>
               </Box>
 
               {/* Admin Message */}
@@ -938,7 +938,7 @@ const maxTime = selectedDate
 
       {/* Modal popup for approved reservation requests */}
       {reservation.status === 'Approved' && (
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered scrollBehavior="inside" closeOnOverlayClick={false}> 
+      <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'full', md: '3xl' }} isCentered scrollBehavior="inside" closeOnOverlayClick={false}> 
         <ModalOverlay/>
         <ModalContent h="95vh" maxH="100vh" borderRadius="lg" >
           <ModalHeader
@@ -955,9 +955,9 @@ const maxTime = selectedDate
           <ModalBody p={6} overflowY="auto">
             <VStack align="start" spacing={4} w="full">
               {/* Resident and Resources */}
-              <HStack align="start" spacing={6} w="full">
+              <Stack direction={{ base: 'column', md: 'row' }} align="start" spacing={6} w="full">
                 {/* Resident Details */}
-                <Box p={4} bg="gray.50" w="50%" borderRadius="md" borderWidth='1px'>
+                <Box p={4} bg="gray.50" w={{ base: 'full', md: '50%' }} borderRadius="md" borderWidth='1px'>
                   <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                     Resident Info
                   </Text>
@@ -984,7 +984,7 @@ const maxTime = selectedDate
                 </Box>
 
                 {/* Resources */}
-                <Box p={4} bg="gray.50" w="50%" borderRadius="md" borderWidth='1px'>
+                <Box p={4} bg="gray.50" w={{ base: 'full', md: '50%' }} borderRadius="md" borderWidth='1px'>
                   <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                     Resource/s
                   </Text>
@@ -1006,7 +1006,7 @@ const maxTime = selectedDate
                     ))}
                   </VStack>
                 </Box>
-              </HStack>
+              </Stack>
 
               {/* Purpose and Appointment Date */}
               <VStack spacing={4} w="full" align="stretch">
@@ -1061,8 +1061,8 @@ const maxTime = selectedDate
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                   Date/s Needed
                 </Text>
-                <HStack w='full' spacing={4}>
-                  <VStack align="start" w='50%'>
+                <Stack direction={{ base: 'column', md: 'row' }} w='full' spacing={4}>
+                  <VStack align="start" w={{ base: 'full', md: '50%' }}>
                     <Text  color="gray.600" fontSize="md">
                       Start Date:
                     </Text>
@@ -1070,7 +1070,7 @@ const maxTime = selectedDate
                       {new Date(reservation.startDate).toLocaleDateString()}
                     </Text>
                   </VStack>
-                  <VStack align="start" w='50%'>
+                  <VStack align="start" w={{ base: 'full', md: '50%' }}>
                     <Text  color="gray.600" fontSize="md">
                       End Date:
                     </Text>
@@ -1078,7 +1078,7 @@ const maxTime = selectedDate
                       {new Date(reservation.endDate).toLocaleDateString()}
                     </Text>
                   </VStack>
-                </HStack>
+                </Stack>
               </Box>
 
               {/* Admin Message */}
@@ -1170,7 +1170,7 @@ const maxTime = selectedDate
       )}
       
       {/* Edit Reservation Modal */}
-      <Modal isOpen={isEditOpen} onClose={handleEditCancel} size="xl" isCentered closeOnOverlayClick={false} scrollBehavior="inside">
+      <Modal isOpen={isEditOpen} onClose={handleEditCancel} size={{ base: 'full', md: 'xl' }} isCentered closeOnOverlayClick={false} scrollBehavior="inside">
           <ModalOverlay/>
           <ModalContent h="90vh" maxH="100vh" borderRadius="lg">
             <ModalHeader
@@ -1291,7 +1291,7 @@ const maxTime = selectedDate
                     <FormLabel fontWeight="bold" color="gray.600" fontSize="lg">
                       Date/s Needed
                     </FormLabel>
-                    <HStack spacing={6}>
+                    <Stack direction={{ base: 'column', md: 'row' }} spacing={6}>
                       <Box flex="1">
                         <FormControl>
                           <FormLabel fontWeight="medium" color="gray.600">
@@ -1320,7 +1320,7 @@ const maxTime = selectedDate
                           />
                         </FormControl>
                       </Box>
-                    </HStack>
+                    </Stack>
                   </FormControl>
                 </Box>
 
@@ -1364,7 +1364,7 @@ const maxTime = selectedDate
 
       {/* Modal popup for declined reservation requests */}    
       {reservation.status === 'Declined' && (            
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered scrollBehavior="inside" closeOnOverlayClick={false}>
+      <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'full', md: '3xl' }} isCentered scrollBehavior="inside" closeOnOverlayClick={false}>
         <ModalOverlay/>
         <ModalContent h="95vh" maxH="100vh" borderRadius="lg">
           <ModalHeader
@@ -1381,9 +1381,9 @@ const maxTime = selectedDate
           <ModalBody p={6}>
             <VStack align="start" spacing={4} w="full">
               {/* Resident and Resources */}
-              <HStack align="start" spacing={6} w="full">
+              <Stack direction={{ base: 'column', md: 'row' }} align="start" spacing={6} w="full">
                 {/* Resident Details */}
-                <Box p={4} bg="gray.50" w="50%" borderRadius="md" borderWidth='1px'>
+                <Box p={4} bg="gray.50" w={{ base: 'full', md: '50%' }} borderRadius="md" borderWidth='1px'>
                   <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                     Resident Info
                   </Text>
@@ -1410,7 +1410,7 @@ const maxTime = selectedDate
                 </Box>
 
                 {/* Resources */}
-                <Box p={4} bg="gray.50" w="50%" borderRadius="md" borderWidth='1px'>
+                <Box p={4} bg="gray.50" w={{ base: 'full', md: '50%' }} borderRadius="md" borderWidth='1px'>
                   <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                     Resource/s
                   </Text>
@@ -1432,7 +1432,7 @@ const maxTime = selectedDate
                     ))}
                   </VStack>
                 </Box>
-              </HStack>
+              </Stack>
 
               {/* Current Resource Inventory */}
               <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth="1px">
@@ -1480,8 +1480,8 @@ const maxTime = selectedDate
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                   Date/s Needed
                 </Text>
-                <HStack w='full' spacing={4}>
-                  <VStack align="start" w='50%'>
+                <Stack direction={{ base: 'column', md: 'row' }} w='full' spacing={4}>
+                  <VStack align="start" w={{ base: 'full', md: '50%' }}>
                     <Text  color="gray.600" fontSize="md">
                       Start Date:
                     </Text>
@@ -1489,7 +1489,7 @@ const maxTime = selectedDate
                       {new Date(reservation.startDate).toLocaleDateString()}
                     </Text>
                   </VStack>
-                  <VStack align="start" w='50%'>
+                  <VStack align="start" w={{ base: 'full', md: '50%' }}>
                     <Text  color="gray.600" fontSize="md">
                       End Date:
                     </Text>
@@ -1497,7 +1497,7 @@ const maxTime = selectedDate
                       {new Date(reservation.endDate).toLocaleDateString()}
                     </Text>
                   </VStack>
-                </HStack>
+                </Stack>
               </Box>
 
               {/* Admin Message */}
@@ -1565,7 +1565,7 @@ const maxTime = selectedDate
 
       {/* Modal popup for In-Use reservation requests */}
       {reservation.status === 'In-Use' && (
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered scrollBehavior="inside" closeOnOverlayClick={false}>
+      <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'full', md: '3xl' }} isCentered scrollBehavior="inside" closeOnOverlayClick={false}>
       <ModalOverlay />
       <ModalContent h="95vh" maxH="100vh" borderRadius="lg">
         <ModalHeader
@@ -1582,9 +1582,9 @@ const maxTime = selectedDate
         <ModalBody p={6}>
           <VStack align="start" spacing={4} w="full">
             {/* Resident and Resources */}
-            <HStack align="start" spacing={6} w="full">
+            <Stack direction={{ base: 'column', md: 'row' }} align="start" spacing={6} w="full">
               {/* Resident Details */}
-              <Box p={4} bg="gray.50" w="50%" borderRadius="md" borderWidth="1px">
+              <Box p={4} bg="gray.50" w={{ base: 'full', md: '50%' }} borderRadius="md" borderWidth="1px">
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                   Resident Info
                 </Text>
@@ -1611,7 +1611,7 @@ const maxTime = selectedDate
               </Box>
     
               {/* Resources */}
-              <Box p={4} bg="gray.50" w="50%" borderRadius="md" borderWidth="1px">
+              <Box p={4} bg="gray.50" w={{ base: 'full', md: '50%' }} borderRadius="md" borderWidth="1px">
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                   Resource/s
                 </Text>
@@ -1624,7 +1624,7 @@ const maxTime = selectedDate
                   ))}
                 </VStack>
               </Box>
-            </HStack>
+            </Stack>
     
             {/* Current Resource Inventory */}
             <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth="1px">
@@ -1669,8 +1669,8 @@ const maxTime = selectedDate
               <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                 Date/s Needed
               </Text>
-              <HStack w="full" spacing={4}>
-                <VStack align="start" w="50%">
+              <Stack direction={{ base: 'column', md: 'row' }} w="full" spacing={4}>
+                <VStack align="start" w={{ base: 'full', md: '50%' }}>
                   <Text color="gray.600" fontSize="md">
                     Start Date:
                   </Text>
@@ -1678,7 +1678,7 @@ const maxTime = selectedDate
                     {new Date(reservation.startDate).toLocaleDateString()}
                   </Text>
                 </VStack>
-                <VStack align="start" w="50%">
+                <VStack align="start" w={{ base: 'full', md: '50%' }}>
                   <Text color="gray.600" fontSize="md">
                     End Date:
                   </Text>
@@ -1686,7 +1686,7 @@ const maxTime = selectedDate
                     {new Date(reservation.endDate).toLocaleDateString()}
                   </Text>
                 </VStack>
-              </HStack>
+              </Stack>
             </Box>
     
             {/* Admin Message */}
@@ -1765,7 +1765,7 @@ const maxTime = selectedDate
 
       {/* Modal popup for Returned reservation requests */}
       {reservation.status === 'Returned' && (
-      <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered scrollBehavior="inside" closeOnOverlayClick={false}>
+      <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'full', md: '3xl' }} isCentered scrollBehavior="inside" closeOnOverlayClick={false}>
       <ModalOverlay />
       <ModalContent h="95vh" maxH="100vh" borderRadius="lg">
         <ModalHeader
@@ -1782,9 +1782,9 @@ const maxTime = selectedDate
         <ModalBody p={6}>
           <VStack align="start" spacing={4} w="full">
             {/* Resident and Resources */}
-            <HStack align="start" spacing={6} w="full">
+            <Stack direction={{ base: 'column', md: 'row' }} align="start" spacing={6} w="full">
               {/* Resident Details */}
-              <Box p={4} bg="gray.50" w="50%" borderRadius="md" borderWidth="1px">
+              <Box p={4} bg="gray.50" w={{ base: 'full', md: '50%' }} borderRadius="md" borderWidth="1px">
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                   Resident Info
                 </Text>
@@ -1811,7 +1811,7 @@ const maxTime = selectedDate
               </Box>
     
               {/* Resources */}
-              <Box p={4} bg="gray.50" w="50%" borderRadius="md" borderWidth="1px">
+              <Box p={4} bg="gray.50" w={{ base: 'full', md: '50%' }} borderRadius="md" borderWidth="1px">
                 <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                   Resource/s
                 </Text>
@@ -1824,7 +1824,7 @@ const maxTime = selectedDate
                   ))}
                 </VStack>
               </Box>
-            </HStack>
+            </Stack>
     
             {/* Current Resource Inventory */}
             <Box p={4} bg="gray.50" w="full" borderRadius="md" borderWidth="1px">
@@ -1887,8 +1887,8 @@ const maxTime = selectedDate
               <Text fontWeight="bold" color="gray.600" fontSize="lg" mb={2}>
                 Date/s Needed
               </Text>
-              <HStack w="full" spacing={4}>
-                <VStack align="start" w="50%">
+              <Stack direction={{ base: 'column', md: 'row' }} w="full" spacing={4}>
+                <VStack align="start" w={{ base: 'full', md: '50%' }}>
                   <Text color="gray.600" fontSize="md">
                     Start Date:
                   </Text>
@@ -1896,7 +1896,7 @@ const maxTime = selectedDate
                     {new Date(reservation.startDate).toLocaleDateString()}
                   </Text>
                 </VStack>
-                <VStack align="start" w="50%">
+                <VStack align="start" w={{ base: 'full', md: '50%' }}>
                   <Text color="gray.600" fontSize="md">
                     End Date:
                   </Text>
@@ -1904,7 +1904,7 @@ const maxTime = selectedDate
                     {new Date(reservation.endDate).toLocaleDateString()}
                   </Text>
                 </VStack>
-              </HStack>
+              </Stack>
             </Box>
     
             {/* Admin Message */}

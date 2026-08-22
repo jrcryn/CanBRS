@@ -24,14 +24,29 @@ function LoginPage() {
     e.preventDefault();
     try {
       const response = await login(formData.identifier, formData.password);
-      toast({
-        title: 'OTP Sent.',
-        description: 'Please check your email or phone for the OTP.',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      });
-      navigate('/auth/verify-login-otp', { state: { userId: response.userId } });
+      if (response.user) {
+        toast({
+          title: 'Logged in.',
+          description: 'You have logged in successfully.',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+        if (response.user.role === 'admin') {
+          navigate('/admin/reservations');
+        } else if (response.user.role === 'resident') {
+          navigate('/resident');
+        }
+      } else {
+        toast({
+          title: 'OTP Sent.',
+          description: 'Please check your email or phone for the OTP.',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+        navigate('/auth/verify-login-otp', { state: { userId: response.userId } });
+      }
 
     } catch (err) {
       const errorMessage = err.response?.data?.message || 'Error';

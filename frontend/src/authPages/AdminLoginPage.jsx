@@ -23,14 +23,25 @@ import { Flex, Box, FormControl, FormLabel, Input, Stack, Button, Heading, Text,
       e.preventDefault()
       try {
         const response = await login(formData.identifier, formData.password)
-        toast({
-          title: 'OTP Sent.',
-          description: 'Please check your email for the OTP.',
-          status: 'success',
-          duration: 5000,
-          isClosable: true,
-        })
-        navigate('/auth/verify-login-otp', { state: { userId: response.userId } })
+        if (response.user) {
+          toast({
+            title: 'Logged in.',
+            description: 'You have logged in successfully.',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          })
+          navigate('/admin/reservations')
+        } else {
+          toast({
+            title: 'OTP Sent.',
+            description: 'Please check your email for the OTP.',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          })
+          navigate('/auth/verify-login-otp', { state: { userId: response.userId } })
+        }
       } catch (err) {
         const errorMessage = err.response?.data?.message || 'Error'
         toast({

@@ -357,6 +357,8 @@ export const login = async (req, res) => {
 
 
 
+      // --- 2FA DISABLED FOR TESTING ---
+      /*
       // Generate OTP
       const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
@@ -376,6 +378,21 @@ export const login = async (req, res) => {
         message: 'OTP sent',
         userId: user._id
       });
+      */
+
+      // Generate JWT and set cookie to bypass 2FA
+      generateTokenAndSetCookie(res, user._id);
+
+      res.status(200).json({ 
+        success: true, 
+        message: 'Login successful.',
+        user: {
+            ...user._doc,
+            isVerified: user.isVerified,
+            password: undefined,
+        }
+      });
+      // --- END OF 2FA BYPASS ---
     } catch (error) {
       console.log('Error in login:', error);
       res.status(500).json({ success: false, message: error.message });

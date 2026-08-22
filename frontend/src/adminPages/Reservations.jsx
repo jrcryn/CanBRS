@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useReservationStore } from '../store/reservation';
 import { useListingStore } from '../store/listing';
 import { useMemo } from 'react';
-import { Container, Text, VStack, InputGroup, InputLeftElement, Input, HStack, Select, Alert, AlertIcon, Box, Divider,
+import { Container, Text, VStack, InputGroup, InputLeftElement, Input, HStack, Select, Alert, AlertIcon, Box, Divider, Stack
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import ReservationCardAdmin from '../components/ReservationCardAdmin';
@@ -98,14 +98,14 @@ const RTrackReservation = () => {
       <VStack spacing={4}>
 
         {/* Header Section */}
-        <HStack justifyContent="space-between" w="full" mb={8} flexWrap="wrap">
+        <Stack direction={{ base: 'column', md: 'row' }} justifyContent="space-between" w="full" mb={8} flexWrap="wrap">
           {/* Title */}
           <Text fontSize={{ base: '3xl', md: '3xl' }} fontWeight={'bold'} color={'blue.600'}>
             Reservation Requests
           </Text>
 
           {/* Search and Sort */}
-          <HStack spacing={4} flexWrap="wrap">
+          <Stack direction={{ base: 'column', md: 'row' }} spacing={4} flexWrap="wrap" w={{ base: 'full', md: 'auto' }}>
             <InputGroup width={{ base: 'full', md: '250px' }}>
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.400" />
@@ -131,8 +131,8 @@ const RTrackReservation = () => {
               <option value="Approved">Approved</option>
               <option value="Declined">Declined</option>
             </Select>
-          </HStack>
-        </HStack>
+          </Stack>
+        </Stack>
 
         {/* Priority Reservation List */}
         <Box w="full" bg="blue.50" p={5} borderRadius="md" borderWidth="5px">
