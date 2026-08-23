@@ -50,7 +50,7 @@ const Listings = () => {
       });
       onClose();
     } catch (error) {
-      console.error('Error creating listing:', error);
+
       toast({
         title: 'Error',
         description: 'There was an error creating the listing.',

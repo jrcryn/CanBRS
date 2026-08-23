@@ -132,33 +132,33 @@ const maxTime = selectedDate
 
   // Update excludeTimesForDate when selectedDate changes
   useEffect(() => {
-    console.log('Selected Date:', selectedDate);
-    console.log('Received bookings:', bookings);
+
+
   
     if (selectedDate) {
       const dateKey = selectedDate.toISOString().split('T')[0];
-      console.log('Looking for date key:', dateKey);
+
   
       const bookedTimes = bookings[dateKey] || [];
-      console.log('Found booked times for date:', bookedTimes);
+
   
       // Calculate total available slots (e.g., 30-minute intervals)
       const interval = 30; // minutes
       const totalSlots = calculateTotalSlots(BUSINESS_HOURS_START, BUSINESS_HOURS_END, interval);
-      console.log('Total available slots:', totalSlots);
+
   
       if (bookedTimes.length < totalSlots) {
         const times = bookedTimes.map((bookedTime) => {
           const bookedDate = new Date(bookedTime);
           const time = createTime(selectedDate, bookedDate.getHours(), bookedDate.getMinutes());
-          console.log('Created excluded time:', time.toLocaleTimeString());
+
           return time;
         });
   
-        console.log('Final excluded times:', times);
+
         setExcludeTimesForDate(times);
       } else {
-        console.log('All times are booked for this date.');
+
         setExcludeTimesForDate([]);
       }
     } else {
@@ -255,7 +255,7 @@ const maxTime = selectedDate
       onClose();
 
     } catch (err) {
-      console.error('Error approving reservation:', err);
+
       toast({
         title: 'Error',
         description: err.response?.data?.message || 'Error approving reservation request.',
@@ -296,7 +296,7 @@ const maxTime = selectedDate
       onClose();
 
     } catch (err) {
-      console.error('Error declining reservation:', err);
+
       toast({
         title: 'Error',
         description: err.response?.data?.message || 'Error declining reservation request.',
@@ -327,7 +327,7 @@ const maxTime = selectedDate
       onClose();
 
     } catch (err) {
-      console.error('Error updating reservation:', err);
+
       toast({
         title: 'Error',
         description: err.response?.data?.message || 'Error updating reservation status.',
@@ -466,7 +466,7 @@ const maxTime = selectedDate
       onEditClose(); // Close the modal
   
     } catch (err) {
-      console.error('Error updating reservation:', err);
+
   
       // Show error message
       toast({
@@ -499,7 +499,7 @@ const maxTime = selectedDate
       onClose();
 
     } catch (err) {
-      console.error('Error updating reservation:', err);
+
       toast({
         title: 'Error',
         description: err.response?.data?.message || 'Error updating reservation status.',
@@ -525,7 +525,7 @@ const maxTime = selectedDate
       onClose();
 
     } catch (err) {
-      console.error('Error updating reservation:', err);
+
       toast({
         title: 'Error',
         description: err.response?.data?.message || 'Error updating reservation status.',
@@ -549,7 +549,7 @@ const maxTime = selectedDate
       });
       onClose();
     } catch (error) {
-      console.error('Error deleting reservation:', error);
+
       toast({
         title: 'Error',
         description: 'Failed to delete the reservation.',
@@ -804,7 +804,7 @@ const maxTime = selectedDate
                         onChange={(date) => {
                           setAppointmentDate(date);
                           setSelectedDate(date);
-                          console.log('Date selected:', date);
+
                         }}
                         showTimeSelect
                         showTimeSelectOnly={false}

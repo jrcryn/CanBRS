@@ -51,7 +51,7 @@ const ListingCardAdmin = ({ listing }) => {
       });
       onClose();
     } catch (error) {
-      console.error('Error updating listing:', error);
+
       toast({
         title: 'Error',
         description: error.response?.data?.message || 'Error updating listing.',

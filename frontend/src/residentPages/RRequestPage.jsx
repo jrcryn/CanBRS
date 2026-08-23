@@ -160,7 +160,7 @@ const InquireForm = () => {
 
       navigate('/resident/track-reservation');
     } catch (error) {
-      console.error('Error submitting reservation:', error);
+
       toast({
         title: 'Submission Error',
         description: 'There was a problem submitting your request.',

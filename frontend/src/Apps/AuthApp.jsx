@@ -40,8 +40,8 @@ function AuthApp() {
     checkAuth()
   }, [checkAuth])
 
-  console.log('isAuthenticated', isAuthenticated)
-  console.log('user', user)
+
+
 
   return (
     <Box>

@@ -22,7 +22,7 @@ const RTrackReservation = () => {
     if (!reservation?.length) return {};
     
     const bookings = {};
-    console.log('Processing reservations for bookings:', reservation);
+
   
     reservation.forEach((res) => {
       if (res?.appointmentDate && res.status === 'Approved') {
@@ -33,12 +33,12 @@ const RTrackReservation = () => {
         if (!bookings[dateKey]) {
           bookings[dateKey] = [];
         }
-        console.log('Adding booked time:', appointmentDate.toLocaleString(), 'for date:', dateKey);
+
         bookings[dateKey].push(appointmentDate);
       }
     });
     
-    console.log('Generated bookings:', bookings);
+
     return bookings;
   }, [reservation]);
 

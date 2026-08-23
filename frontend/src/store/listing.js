@@ -36,10 +36,10 @@ export const useListingStore = create((set) => ({
           params: { excludeImages },
         });
         const data = res.data;
-        console.log('Fetched listings:', data);
+
         set({ listing: data.data, isLoading: false });
       } catch (error) {
-        console.error('Error fetching listings:', error);
+
         set({ isLoading: false, error });
       }
     },
@@ -54,7 +54,7 @@ export const useListingStore = create((set) => ({
         });
         set({ listingsWithoutImages: res.data.data, isLoading: false });
       } catch (error) {
-        console.error('Error fetching listings without images:', error);
+
         set({ isLoading: false, error });
       }
     },
@@ -74,7 +74,7 @@ export const useListingStore = create((set) => ({
         set({ isLoading: false });
         return updatedListing;
       } catch (error) {
-        console.error('Error updating listing:', error);
+
         set({ isLoading: false });
         throw error;
       }
@@ -89,7 +89,7 @@ export const useListingStore = create((set) => ({
           }));
           set({ isLoading: false });
         } catch (error) {
-          console.error('Error deleting listing:', error);
+
           set({ isLoading: false });
         }
     },

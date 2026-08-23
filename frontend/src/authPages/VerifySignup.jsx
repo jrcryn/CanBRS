@@ -41,7 +41,7 @@ export default function VerifySignup() {
         isClosable: true,
       })
     }
-    console.log(error)
+
   }
 
   return (
