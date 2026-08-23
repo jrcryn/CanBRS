@@ -62,7 +62,13 @@ app.use('/auth', authRoutes);
 app.use('/', reservationRoutes);
 app.use('/', residentRoutes);
 
-server.listen(PORT, () => {
+if (process.env.NODE_ENV !== 'production') {
+    server.listen(PORT, () => {
+        connectDB();
+        console.log(`Server started at http://localhost:${PORT}`);
+    });
+} else {
     connectDB();
-    console.log(`Server started at http://localhost:${PORT}`);
-});
+}
+
+export default app;
