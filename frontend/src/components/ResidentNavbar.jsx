@@ -74,7 +74,7 @@ function ResidentNavbar() {
             minW={'200px'} // Prevents the text from shrinking
             flexShrink={0} // Prevents the text from shrinking
           >
-            Hello, {user.firstname} {user.lastname} 👋
+            Hello, {user?.firstname} {user?.lastname} 👋
           </Text>
 
           <Button

@@ -21,7 +21,7 @@ const ListingPage = () => {
   }
 
   // To filter listings based on the search query
-  const filteredListings = listing.filter((listing) => {
+  const filteredListings = listing?.filter((listing) => {
     const matchesSearch = listing.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesType = selectedType ? listing.type === selectedType : true;
     return matchesSearch && matchesType;

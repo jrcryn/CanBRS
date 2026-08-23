@@ -21,9 +21,9 @@ const RedirectAuthenticatedUser = ({ children }) => {
   if (isAuthenticated) {
     if (!user?.isVerified) {
       return <Navigate to='/auth/verify-signup-otp' replace />;
-    } else if (user.role === 'admin') {
+    } else if (user?.role === 'admin') {
       return <Navigate to='/admin/reservations' replace />;
-    } else if (user.role === 'resident') {
+    } else if (user?.role === 'resident') {
       return <Navigate to='/resident' replace />;
     } else {
       return <Navigate to='/' replace />;

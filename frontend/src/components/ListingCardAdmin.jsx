@@ -12,11 +12,11 @@ const ListingCardAdmin = ({ listing }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const [formData, setFormData] = React.useState({
-    name: listing.name,
-    description: listing.description,
-    inventory: listing.inventory,
-    address: listing.address,
-    type: listing.type,
+    name: listing.name || '',
+    description: listing.description || '',
+    inventory: listing.inventory || 0,
+    address: listing.address || '',
+    type: listing.type || '',
     image: listing.image || '',
   });
 
