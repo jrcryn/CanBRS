@@ -14,7 +14,7 @@ import authRoutes from './routes/auth.route.js';
 import reservationRoutes from './routes/reservation.route.js';
 import residentRoutes from './routes/resident.route.js';
 
-dotenv.config({ path: './backend/.env' });
+dotenv.config();
 const PORT = process.env.PORT;
 
 app.use(express.json());
