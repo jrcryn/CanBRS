@@ -23,7 +23,7 @@ const ProtectedRoute = ({ children }) => {
   if (!isAuthenticated) {
     return <Navigate to='/auth/resident-login' replace />
   }
-  if (!user.isVerified) {
+  if (!user?.isVerified) {
     return <Navigate to='/auth/verify-signup-otp' replace />
   }
   return children

@@ -18,7 +18,7 @@ const RedirectAuthenticatedUser = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
 
   if (isAuthenticated) {
-    if (!user.isVerified) {
+    if (!user?.isVerified) {
       return <Navigate to='/auth/verify-signup-otp' replace />;
     } else if (user.role === 'admin') {
       return <Navigate to='/admin/reservations' replace />;
