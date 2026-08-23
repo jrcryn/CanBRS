@@ -3,7 +3,7 @@ import { Button, Flex, FormControl, FormLabel, Heading, Input, InputGroup, Input
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
 import { useAuthStore } from '../store/auth';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
 
 function ResetPassword() {
@@ -15,7 +15,6 @@ function ResetPassword() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const { token } = useParams()
-  const navigate = useNavigate()
   const toast = useToast()
 
   const handleSubmit = async (e) => {

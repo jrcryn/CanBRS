@@ -15,6 +15,7 @@ import TrackReservation from '../residentPages/RTrackReservationPage'
 
 import LoadingSpinner from '../components/LoadingSpinner'
 import NotFound from '../components/NotFound'
+import PropTypes from 'prop-types';
 
 // ProtectedRoute component for routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -63,3 +64,9 @@ function ResidentApp() {
 }
 
 export default ResidentApp
+ProtectedRoute.propTypes = {
+  children: PropTypes.any,
+};
+ResidentApp.propTypes = {
+  children: PropTypes.any,
+};

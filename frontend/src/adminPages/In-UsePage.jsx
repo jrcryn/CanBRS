@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import {
-  Container, VStack, HStack, Text, Box, Divider, InputGroup, InputLeftElement, Input, Alert, AlertIcon, Button, Stack
+  Container, VStack,  Text, Box, Divider, InputGroup, InputLeftElement, Input, Alert, AlertIcon, Button, Stack
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { shallow } from 'zustand/shallow';
@@ -125,13 +125,13 @@ const InUsePage = () => {
           <Text fontSize="2xl" fontWeight="bold" color="red.600" mb={4}>
             End Dates and Past
           </Text>
-          {endDatesAndPastReservations.length === 0 ? (
+          {(!endDatesAndPastReservations || endDatesAndPastReservations.length === 0) ? (
             <Text fontSize="xl" textAlign="center" color="gray.500">
               No Reservations to Return
             </Text>
           ) : (
             <VStack spacing={4} w="full">
-              {endDatesAndPastReservations.map((res) => (
+              {endDatesAndPastReservations?.map((res) => (
                 <ReservationCardAdmin
                   key={res._id}
                   reservation={res}
@@ -152,13 +152,13 @@ const InUsePage = () => {
           <Text fontSize="2xl" fontWeight="bold" color="blue.600" mb={4}>
             In-Use Resources
           </Text>
-          {inUseResources.length === 0 ? (
+          {(!inUseResources || inUseResources.length === 0) ? (
             <Text fontSize="xl" textAlign="center" color="gray.500">
               No Active In-Use Reservations
             </Text>
           ) : (
             <VStack spacing={4} w="full">
-              {inUseResources.map((res) => (
+              {inUseResources?.map((res) => (
                 <ReservationCardAdmin
                   key={res._id}
                   reservation={res}

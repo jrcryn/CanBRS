@@ -1,5 +1,5 @@
 // RTrackReservationPage.jsx
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useReservationStore } from '../store/reservation';
 import { Container, Text, VStack, InputGroup, InputLeftElement, Input, Stack, Select, Alert, AlertIcon,
 } from '@chakra-ui/react';
@@ -80,13 +80,13 @@ const RTrackReservation = () => {
         </Stack>
 
         {/* Reservation List */}
-        {filteredReservations.length === 0 ? (
+        {(!filteredReservations || filteredReservations.length === 0) ? (
           <Text fontSize={'2xl'} textAlign={'center'} fontWeight={'bold'} color={'gray.500'}>
             No Reservations Found
           </Text>
         ) : (
           <VStack spacing={4} w="full">
-            {filteredReservations.map((res) => (
+            {filteredReservations?.map((res) => (
               <ReservationList key={res._id} reservation={res} />
             ))}
           </VStack>

@@ -79,7 +79,7 @@ const ResidentAccounts = () => {
               value={selectedSitio}
               onChange={(e) => setSelectedSitio(e.target.value)}
             >
-              {Sitios.map((sitio) => (
+              {Sitios?.map((sitio) => (
                 <option key={sitio} value={sitio}>
                   {sitio}
                 </option>
@@ -94,13 +94,13 @@ const ResidentAccounts = () => {
         </HStack>
 
         {/* Residents List */}
-        {filteredResidents.length === 0 ? (
+        {(!filteredResidents || filteredResidents.length === 0) ? (
           <Text fontSize="2xl" textAlign="center" fontWeight="bold" color="gray.500">
             No Verified Residents Found
           </Text>
         ) : (
           <VStack spacing={4} w="full" align="stretch">
-            {filteredResidents.map((resident) => (
+            {filteredResidents?.map((resident) => (
               <ResidentAccountsCard key={resident._id} resident={resident} />
             ))}
           </VStack>

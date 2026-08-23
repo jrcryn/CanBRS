@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useReservationStore } from '../store/reservation';
 import { useListingStore } from '../store/listing';
 import { useMemo } from 'react';
-import { Container, Text, VStack, InputGroup, InputLeftElement, Input, HStack, Select, Alert, AlertIcon, Box, Divider, Stack
+import { Container, Text, VStack, InputGroup, InputLeftElement, Input,  Select, Alert, AlertIcon, Box, Divider, Stack
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import ReservationCardAdmin from '../components/ReservationCardAdmin';
@@ -139,13 +139,13 @@ const RTrackReservation = () => {
           <Text fontSize="2xl" fontWeight="bold" color="blue.600" mb={4}>
             Priority Requests
           </Text>
-          {priorityReservations.length === 0 ? (
+          {(!priorityReservations || priorityReservations.length === 0) ? (
             <Text fontSize="xl" textAlign="center" color="gray.500">
               No Priority Reservations Found
             </Text>
           ) : (
             <VStack spacing={4} w="full">
-              {priorityReservations.map((res) => (
+              {priorityReservations?.map((res) => (
                 <ReservationCardAdmin
                   key={res._id}
                   reservation={res}
@@ -168,13 +168,13 @@ const RTrackReservation = () => {
         <Text fontSize="2xl" fontWeight="bold" color="blue.600" mb={4}>
             Regular Requests
           </Text>
-          {regularReservations.length === 0 ? (
+          {(!regularReservations || regularReservations.length === 0) ? (
             <Text fontSize="xl" textAlign="center" color="gray.500">
               No Regular Reservations Found
             </Text>
           ) : (
             <VStack spacing={4} w="full">
-              {regularReservations.map((res) => (
+              {regularReservations?.map((res) => (
                 <ReservationCardAdmin
                   key={res._id}
                   reservation={res}

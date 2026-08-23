@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Text,
   VStack,
-  HStack,
+  
   Button,
   Input,
   InputGroup,
@@ -20,14 +20,14 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-  Stack,
-} from '@chakra-ui/react';
+  Stack} from '@chakra-ui/react';
 
 import { SearchIcon, AddIcon } from '@chakra-ui/icons';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import { UseResidentStore } from '../store/residents.js';
+import PropTypes from 'prop-types';
 
 const AdminAccountsPage = () => {
 
@@ -90,13 +90,13 @@ const AdminAccountsPage = () => {
         </Stack>
 
         {/* Admins List */}
-        {filteredAdmins.length === 0 ? (
+        {(!filteredAdmins || filteredAdmins.length === 0) ? (
           <Text fontSize="2xl" textAlign="center" fontWeight="bold" color="gray.500">
             No Admins Found
           </Text>
         ) : (
           <VStack spacing={4} align="stretch">
-            {filteredAdmins.map((admin) => (
+            {filteredAdmins?.map((admin) => (
               <AdminCard key={admin._id} admin={admin} />
             ))}
           </VStack>
@@ -224,3 +224,9 @@ const AdminCard = ({ admin }) => {
 };
 
 export default AdminAccountsPage;
+AdminAccountsPage.propTypes = {
+  admin: PropTypes.any,
+};
+AdminCard.propTypes = {
+  admin: PropTypes.any,
+};

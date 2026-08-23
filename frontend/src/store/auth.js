@@ -148,7 +148,7 @@ export const useAuthStore = create((set) => ({
             } else {
                 set({ error: null, isCheckingAuth: false, isAuthenticated: false, user: null });
             }
-        } catch (error) {
+        } catch {
             set({ error: null, isCheckingAuth: false, isAuthenticated: false, user: null });
         }
     },

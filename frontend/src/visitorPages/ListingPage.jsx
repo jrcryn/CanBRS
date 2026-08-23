@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useListingStore } from "../store/listing";
 import ListingCard from '../components/ListingCardClient';
 import { Link as ReactRouterLink } from 'react-router-dom';
@@ -76,13 +76,13 @@ const ListingPage = () => {
           spacing={{ base: 5, md: 10 }}
           w={'full'}
         >
-          {filteredListings.map((item) => (
+          {filteredListings?.map((item) => (
             <ListingCard key={item._id} listing={item} />
           ))}
         </SimpleGrid>
 
         {/* No Listings Message */}
-        {filteredListings.length === 0 && (
+        {(!filteredListings || filteredListings.length === 0) && (
           <Text fontSize={'2xl'} textAlign={'center'} fontWeight={'bold'} color={'gray.500'}>
             No Listings Available
           </Text>

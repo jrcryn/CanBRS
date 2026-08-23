@@ -11,7 +11,7 @@ export default function VerifySignup() {
   const toast = useToast()
   const navigate = useNavigate()
 
-  const { error, isLoading, verifySignup } = useAuthStore()
+  const { isLoading, verifySignup } = useAuthStore()
 
   const handleVerify = async (e) => {
     e.preventDefault()

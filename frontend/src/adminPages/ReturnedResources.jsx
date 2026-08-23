@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Container, VStack, HStack, Text, InputGroup, InputLeftElement, Input, Alert, AlertIcon, Button,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
@@ -85,13 +85,13 @@ const ReturnedResources = () => {
         </HStack>
 
         {/* Returned Reservations */}
-        {filteredReservations.length === 0 ? (
+        {(!filteredReservations || filteredReservations.length === 0) ? (
           <Text fontSize="xl" textAlign="center" color="gray.500">
             No Returned Reservations Found
           </Text>
         ) : (
           <VStack spacing={4} w="full">
-            {filteredReservations.map((res) => (
+            {filteredReservations?.map((res) => (
               <ReservationCardAdmin
                 key={res._id}
                 reservation={res}

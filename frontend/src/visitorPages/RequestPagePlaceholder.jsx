@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Box, Heading, Text, Button, Stack, useBreakpointValue, Flex } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 

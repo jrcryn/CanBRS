@@ -1,7 +1,8 @@
-import React from 'react';
+
 import { Box, Flex, IconButton, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import Sidebar from './Sidebar';
+import PropTypes from 'prop-types';
 
 const Layout = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,3 +56,7 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+
+Layout.propTypes = {
+  children: PropTypes.any,
+};

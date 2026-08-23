@@ -37,10 +37,10 @@ const CreatePage = () => {
         }
 
         try {
-            const data = await createListing(formData);
+            await createListing(formData);
             // Handle success or error
-        } catch (error) {
-
+        } catch (err) {
+            console.error(err);
         }
     };
 

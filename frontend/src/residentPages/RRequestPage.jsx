@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useListingStore } from '../store/listing';
 import { useReservationStore } from '../store/reservation';
 import { useToast } from '@chakra-ui/react';
@@ -44,7 +44,7 @@ const InquireForm = () => {
     // Synchronize selectedListings with updated listings
     setSelectedListings((prevSelected) =>
       prevSelected
-        .map((selectedItem) => {
+        ?.map((selectedItem) => {
           const updatedItem = listing.find((listItem) => listItem._id === selectedItem.resource._id);
           if (updatedItem) {
             return { ...selectedItem, resource: updatedItem };
@@ -59,7 +59,7 @@ const InquireForm = () => {
       (selectedItem) => !listing.some((listItem) => listItem._id === selectedItem.resource._id)
     );
 
-    if (removedListings.length > 0) {
+    if (removedListings?.length > 0) {
       toast({
         title: 'Resource Updated',
         description: 'Some selected resources were updated or removed. Please review your selection.',
@@ -68,7 +68,7 @@ const InquireForm = () => {
         isClosable: true,
       });
     }
-  }, [listing]);
+  }, [listing, selectedListings, toast]);
 
   if (listingLoading) {
     return <LoadingSpinner />;
@@ -114,20 +114,19 @@ const InquireForm = () => {
     });
 
     if (invalidQuantities) {
-      // Show an error message or toast to the user
+      // Show an message or toast to the user
       toast({
         title: 'Invalid Quantity',
         description: 'Please enter valid quantities for all selected equipment resources.',
-        status: 'error',
+        status: '',
         duration: 5000,
-        isClosable: true,
-      });
+        isClosable: true});
       return;
     }
 
     // Collect form data, including selected listings and their quantities
     const requestData = {
-      resources: selectedListings.map((item) => ({
+      resources: selectedListings?.map((item) => ({
         resourceId: item.resource._id,
         quantity: item.resource.type === 'facility' ? 1 : parseInt(item.quantity, 10),
       })),
@@ -159,15 +158,14 @@ const InquireForm = () => {
       });
 
       navigate('/resident/track-reservation');
-    } catch (error) {
+    } catch {
 
       toast({
         title: 'Submission Error',
         description: 'There was a problem submitting your request.',
-        status: 'error',
+        status: '',
         duration: 5000,
-        isClosable: true,
-      });
+        isClosable: true});
     }
   };
 
@@ -203,7 +201,7 @@ const InquireForm = () => {
                   handleTargetResourceChange(e);
                 }}
               >
-                {availableListings.map((resource) => (
+                {availableListings?.map((resource) => (
                   <option key={resource._id} value={resource._id}>
                     {resource.type === 'facility' 
                       ? `${resource.name} - ${resource.address}` 
@@ -219,8 +217,8 @@ const InquireForm = () => {
             <FormControl>
               <FormLabel>Selected Resource/s</FormLabel>
               <List spacing={2} borderWidth={1} borderRadius="md" p={2}>
-                {selectedListings.length > 0 ? (
-                  selectedListings.map((item, index) => (
+                {selectedListings?.length > 0 ? (
+                  selectedListings?.map((item, index) => (
                     <ListItem
                       key={item.resource._id}
                       color="gray.700"
@@ -265,7 +263,9 @@ const InquireForm = () => {
           <FormControl isRequired>
             <FormLabel>Start Date</FormLabel>
             <InputGroup>
-              <InputLeftElement pointerEvents="none" children={<FaCalendarAlt color="gray.300" />} />
+              <InputLeftElement pointerEvents="none">
+                <FaCalendarAlt color="gray.300" />
+              </InputLeftElement>
 
               <Input 
                 type="date" 
@@ -282,7 +282,9 @@ const InquireForm = () => {
             <FormControl isRequired>
               <FormLabel>End Date</FormLabel>
               <InputGroup>
-                <InputLeftElement pointerEvents="none" children={<FaCalendarAlt color="gray.300" />} />
+                <InputLeftElement pointerEvents="none">
+                  <FaCalendarAlt color="gray.300" />
+                </InputLeftElement>
                 <Input 
                   type="date"
                   value={endDate}

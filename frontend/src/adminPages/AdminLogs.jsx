@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import {
   Box,
   Text,
-  VStack,
+  
   HStack,
   Input,
   Table,
@@ -12,8 +12,7 @@ import {
   Th,
   Td,
   Alert,
-  AlertIcon,
-} from '@chakra-ui/react';
+  AlertIcon} from '@chakra-ui/react';
 import { useReservationStore } from '../store/reservation';
 
 const AdminLogs = () => {
@@ -68,7 +67,7 @@ const AdminLogs = () => {
         />
       </HStack>
 
-      {filteredReservationsByDate.length === 0 ? (
+      {(!filteredReservationsByDate || filteredReservationsByDate.length === 0) ? (
         <Alert status="info">
           <AlertIcon />
           No reservations found for the selected date.
@@ -86,7 +85,7 @@ const AdminLogs = () => {
             </Tr>
           </Thead>
           <Tbody>
-    {filteredReservationsByDate.map((res) => (
+    {filteredReservationsByDate?.map((res) => (
       <Tr key={res._id}>
         <Td>{`${res.resident.firstname} ${res.resident.lastname}`}</Td>
         <Td>{res.status === 'Pending' ? 1 : 0}</Td>

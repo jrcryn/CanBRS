@@ -13,6 +13,7 @@ import ResetPassword from '../authPages/ResetPassword'
 import LoginPageOtp from '../authPages/LoginOtpPage'
 import PleaseWaitForVerification from '../authPages/PleaseWaitForVerification'
 import NotFound from '../components/NotFound'
+import PropTypes from 'prop-types';
 
 const RedirectAuthenticatedUser = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -34,7 +35,7 @@ const RedirectAuthenticatedUser = ({ children }) => {
 };
 
 function AuthApp() {
-  const {checkAuth, isAuthenticated, user} = useAuthStore()
+  const {checkAuth} = useAuthStore()
 
   useEffect(() => {
     checkAuth()
@@ -98,3 +99,10 @@ function AuthApp() {
 }
 
 export default AuthApp
+
+RedirectAuthenticatedUser.propTypes = {
+  children: PropTypes.any,
+};
+AuthApp.propTypes = {
+  children: PropTypes.any,
+};

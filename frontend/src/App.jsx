@@ -4,7 +4,7 @@ import  VisitorApp  from './Apps/VisitorApp'
 import AdminApp from './Apps/AdminApp'
 import ResidentApp from './Apps/ResidentApp'
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useListingStore } from './store/listing';
 
 

@@ -1,5 +1,6 @@
-import React from 'react';
+
 import { Box, Text, VStack, Flex, useBreakpointValue } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 
 const ReservationStep = ({ stepNumber, stepText }) => {
   // Define responsive size values based on breakpoints
@@ -61,3 +62,12 @@ const ReservationProcess = () => {
 
 export default ReservationProcess;
 
+
+ReservationStep.propTypes = {
+  stepNumber: PropTypes.any,
+  stepText: PropTypes.any,
+};
+ReservationProcess.propTypes = {
+  stepNumber: PropTypes.any,
+  stepText: PropTypes.any,
+};

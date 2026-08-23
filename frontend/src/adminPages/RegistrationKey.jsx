@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Container, VStack, HStack, Text, Alert, AlertIcon, Button, Table, Thead, Tbody, Tr, Th, Td, IconButton, Box,
 } from '@chakra-ui/react';
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
@@ -135,7 +135,7 @@ const RegistrationKey = () => {
 
 
         {/* Key List */}
-        {keys.length === 0 ? (
+        {(!keys || keys.length === 0) ? (
           <Text fontSize="2xl" textAlign="center" fontWeight="bold" color="gray.500">
             No Registration Keys Found
           </Text>
@@ -150,7 +150,7 @@ const RegistrationKey = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {keys.map((key) => (
+              {keys?.map((key) => (
                 <Tr key={key._id}>
                   <Td>{key.key}</Td>
                   <Td>{new Date(key.createdAt).toLocaleDateString()}</Td>

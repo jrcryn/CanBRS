@@ -66,7 +66,7 @@ export const UseResidentStore = create((set) => ({
 
             set({ residents: response.data.residents, isLoading: false });
     
-        } catch (error) {
+        } catch {
 
             set({ error: 'Failed to fetch residents', isLoading: false });
             
@@ -82,7 +82,7 @@ export const UseResidentStore = create((set) => ({
 
             set({ admins: response.data.admins, isLoading: false });
     
-        } catch (error) {
+        } catch {
 
             set({ error: 'Failed to fetch admins', isLoading: false });
             

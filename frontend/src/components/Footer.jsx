@@ -1,8 +1,9 @@
-import React from 'react'
+
 import { Box, chakra, Container, SimpleGrid, Stack, Text, VisuallyHidden, useColorModeValue,
 } from '@chakra-ui/react'
 import { Link as RouterLink } from 'react-router-dom'
-import { FaInstagram, FaTwitter, FaFacebook } from 'react-icons/fa'
+import PropTypes from 'prop-types';
+
 
 const SocialButton = ({ children, label, href }) => {
   return (
@@ -90,3 +91,19 @@ export default function Footer() {
     </Box>
   )
 }
+
+SocialButton.propTypes = {
+  children: PropTypes.any,
+  label: PropTypes.any,
+  href: PropTypes.any,
+};
+ListHeader.propTypes = {
+  children: PropTypes.any,
+  label: PropTypes.any,
+  href: PropTypes.any,
+};
+Footer.propTypes = {
+  children: PropTypes.any,
+  label: PropTypes.any,
+  href: PropTypes.any,
+};

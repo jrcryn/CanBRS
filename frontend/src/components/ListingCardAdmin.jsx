@@ -1,10 +1,11 @@
 import React from 'react';
 import {
   Box, Image, Text, VStack, HStack, Badge, Button, Divider, Modal,
-  ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input, Textarea, Select, useDisclosure, useToast,
+  ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input, Textarea,  useDisclosure, useToast,
   FormControl, FormLabel
 } from '@chakra-ui/react';
 import { useListingStore } from '../store/listing';
+import PropTypes from 'prop-types';
 
 const ListingCardAdmin = ({ listing }) => {
   const { updateListing, isLoading } = useListingStore();
@@ -169,7 +170,7 @@ const ListingCardAdmin = ({ listing }) => {
                 />
               </FormControl>
 
-              {/* Type Select */}
+              {/* Type */}
               <FormControl isRequired>
                 <FormLabel>Type</FormLabel>
                 <Input
@@ -272,3 +273,6 @@ const ListingCardAdmin = ({ listing }) => {
 };
 
 export default ListingCardAdmin;
+ListingCardAdmin.propTypes = {
+  listing: PropTypes.any,
+};

@@ -88,8 +88,7 @@ export const useListingStore = create((set) => ({
             listing: state.listing.filter((listing) => listing._id !== id),
           }));
           set({ isLoading: false });
-        } catch (error) {
-
+        } catch {
           set({ isLoading: false });
         }
     },

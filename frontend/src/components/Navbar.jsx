@@ -8,6 +8,7 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons'
 import { FaUser } from "react-icons/fa";
+import PropTypes from 'prop-types';
 
 function Navbar() {
   const { isOpen, onToggle } = useDisclosure()
@@ -90,7 +91,7 @@ const DesktopNav = () => {
 
   return (
     <Stack direction={'row'} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
+      {NAV_ITEMS?.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
@@ -118,7 +119,7 @@ const DesktopNav = () => {
                 rounded={'xl'}
                 minW={'sm'}>
                 <Stack>
-                  {navItem.children.map((child) => (
+                  {navItem.children?.map((child) => (
                     <DesktopSubNav key={child.label} {...child} />
                   ))}
                 </Stack>
@@ -169,7 +170,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 const MobileNav = () => {
   return (
     <Stack bg={('white')} p={4} display={{ md: 'none' }}>
-      {NAV_ITEMS.map((navItem) => (
+      {NAV_ITEMS?.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
     </Stack>
@@ -213,7 +214,7 @@ const MobileNavItem = ({ label, children, href }) => {
           borderColor={('gray.200')}
           align={'start'}>
           {children &&
-            children.map((child) => (
+            children?.map((child) => (
               <Box as="a" key={child.label} py={2} href={child.href}>
                 {child.label}
               </Box>
@@ -242,3 +243,34 @@ const NAV_ITEMS = [
 ]
 
 export default Navbar
+
+DesktopNav.propTypes = {
+  label: PropTypes.any,
+  href: PropTypes.any,
+  subLabel: PropTypes.any,
+  children: PropTypes.any,
+};
+DesktopSubNav.propTypes = {
+  label: PropTypes.any,
+  href: PropTypes.any,
+  subLabel: PropTypes.any,
+  children: PropTypes.any,
+};
+MobileNav.propTypes = {
+  label: PropTypes.any,
+  href: PropTypes.any,
+  subLabel: PropTypes.any,
+  children: PropTypes.any,
+};
+MobileNavItem.propTypes = {
+  label: PropTypes.any,
+  href: PropTypes.any,
+  subLabel: PropTypes.any,
+  children: PropTypes.any,
+};
+Navbar.propTypes = {
+  label: PropTypes.any,
+  href: PropTypes.any,
+  subLabel: PropTypes.any,
+  children: PropTypes.any,
+};

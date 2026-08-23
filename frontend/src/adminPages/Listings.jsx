@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Container, VStack, HStack, Text, Alert, AlertIcon, Button, Input, InputGroup, InputLeftElement, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Select, Textarea, useDisclosure, useToast, FormControl, FormLabel, Stack
+import { useEffect, useState } from 'react';
+import { Container, VStack,  Text, Alert, AlertIcon, Button, Input, InputGroup, InputLeftElement, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Select, Textarea, useDisclosure, useToast, FormControl, FormLabel, Stack
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { useListingStore } from '../store/listing';
@@ -25,7 +25,7 @@ const Listings = () => {
   useEffect(() => {
     fetchListing();
     initializeSocketListeners();
-  }, []);
+  }, [fetchListing, initializeSocketListeners]);
 
   const handleAddListing = async (e) => {
     e.preventDefault();
@@ -49,15 +49,14 @@ const Listings = () => {
         type: '',
       });
       onClose();
-    } catch (error) {
+    } catch {
 
       toast({
         title: 'Error',
-        description: 'There was an error creating the listing.',
-        status: 'error',
+        description: 'There was an creating the listing.',
+        status: '',
         duration: 5000,
-        isClosable: true,
-      });
+        isClosable: true});
     }
   };
 
@@ -65,7 +64,7 @@ const Listings = () => {
 
   if (error) {
     return (
-      <Alert status="error">
+      <Alert status="">
         <AlertIcon />
         Error fetching listings. Please try again later.
       </Alert>
@@ -124,12 +123,12 @@ const Listings = () => {
 
         {/* Listings */}
         <VStack spacing={4} w="full">
-          {filteredListings.map((item) => (
+          {filteredListings?.map((item) => (
             <ListingCardAdmin key={item._id} listing={item} />
           ))}
 
         {/* No Listings Message */}
-        {filteredListings.length === 0 && (
+        {(!filteredListings || filteredListings.length === 0) && (
           <Text fontSize={'2xl'} textAlign={'center'} fontWeight={'bold'} color={'gray.500'}>
             No Listings Available
           </Text>

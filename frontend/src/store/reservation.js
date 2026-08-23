@@ -63,7 +63,7 @@ export const useReservationStore = create((set) => ({
           const updatedReservation = response.data.data;
     
           set((state) => ({
-            reservation: state.reservation.map((res) =>
+            reservation: (state.reservation || []).map((res) =>
               res._id === id ? updatedReservation : res
             ),
             isLoading: false,

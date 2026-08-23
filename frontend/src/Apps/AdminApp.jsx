@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Box } from '@chakra-ui/react'
 import { Routes, Route } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
@@ -37,7 +38,7 @@ function AdminApp() {
 
     useEffect(() => {
       checkAuth()
-      if (checkAuth) {}
+      
     }, [checkAuth])
 
     if(isCheckingAuth) {
@@ -68,3 +69,5 @@ function AdminApp() {
 }
 
 export default AdminApp
+ProtectedRoute.propTypes = { children: PropTypes.any };
+AdminApp.propTypes = { children: PropTypes.any };

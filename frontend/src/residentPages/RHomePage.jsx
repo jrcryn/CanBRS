@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import ReservationProcess from '../components/ReservationProcess';
 import ReservationStep from '../components/ReservationStep';

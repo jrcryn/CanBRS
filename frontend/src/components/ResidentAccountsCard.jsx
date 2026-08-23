@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useState } from 'react';
 import { Box, Text, Button, VStack, HStack, Avatar, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Image, Select, useToast, Textarea, Alert, AlertIcon,
 } from '@chakra-ui/react';
@@ -8,6 +8,7 @@ import { WarningIcon } from '@chakra-ui/icons';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import { UseResidentStore } from '../store/residents';
+import PropTypes from 'prop-types';
 
 const ResidentAccountsCard = ({ resident }) => {
 const { isOpen, onOpen, onClose } = useDisclosure();
@@ -81,7 +82,7 @@ const handleDeclineResident = async () => {
       return;
     }
 
-    if (declineReason.length > 80) {
+    if (declineReason?.length > 80) {
       toast({
         title: 'Reason Too Long',
         description: 'Reason must be 60 characters or less.',
@@ -684,9 +685,9 @@ const calculateAge = (birthdate) => {
               />
               <HStack justifyContent="space-between">
                 <Text fontSize="sm" color="gray.500">
-                  {declineReason.length}/80 characters
+                  {declineReason?.length}/80 characters
                 </Text>
-                {declineReason.length === 100 && (
+                {declineReason?.length === 100 && (
                   <Text fontSize="sm" color="red.500">
                     Maximum character limit reached.
                   </Text>
@@ -722,3 +723,6 @@ const calculateAge = (birthdate) => {
 };
 
 export default ResidentAccountsCard;
+ResidentAccountsCard.propTypes = {
+  resident: PropTypes.any,
+};

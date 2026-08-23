@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useAuthStore } from '../store/auth';
 
 import { Link } from 'react-router-dom';
@@ -7,9 +7,10 @@ import {
   Icon,
   Button,
 } from '@chakra-ui/react';
-import { FaClipboardList, FaUsers, FaSignOutAlt, FaTruckLoading, FaHouseUser, FaKey } from 'react-icons/fa';
+import { FaClipboardList,  FaSignOutAlt, FaTruckLoading, FaHouseUser, FaKey } from 'react-icons/fa';
 import { RiAdminFill } from "react-icons/ri";
 import { MdDashboard } from "react-icons/md";
+import PropTypes from 'prop-types';
 
 const Dashboard = ({ isMobile, onClose }) => {
   const { logout } = useAuthStore();
@@ -175,3 +176,8 @@ const Dashboard = ({ isMobile, onClose }) => {
 };
 
 export default Dashboard;
+
+Dashboard.propTypes = {
+  isMobile: PropTypes.any,
+  onClose: PropTypes.any,
+};

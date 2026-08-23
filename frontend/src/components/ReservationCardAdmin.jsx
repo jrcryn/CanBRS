@@ -1,3 +1,7 @@
+import PropTypes from 'prop-types';
+
+const BUSINESS_HOURS_START = { hours: 8, minutes: 30 }; // 8:30 AM
+const BUSINESS_HOURS_END = { hours: 16, minutes: 30 };  // 4:30 PM
 import React, { useEffect, useState, forwardRef } from 'react';
 import { Box, Text, HStack, VStack, Icon, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Flex, Input, Textarea, useToast, FormControl, FormLabel, Select, Stack
 } from '@chakra-ui/react';
@@ -8,7 +12,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
 
 const ReservationCardAdmin = React.memo(
-  (({ isOpen, onOpen, onClose, reservation, bookings, listings, deleteReservation }) => {
+  function ReservationCardAdmin({ isOpen, onOpen, onClose, reservation, bookings, listings, deleteReservation }) {
 
   const { updateReservationAdmin } = useReservationStore();
 
@@ -20,14 +24,14 @@ const ReservationCardAdmin = React.memo(
 
   const toast = useToast()
 
-  const [localListings, setLocalListings] = useState(listings);
+  const [localListings] = useState(listings);
 
   const [appointmentDate, setAppointmentDate] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [excludeTimesForDate, setExcludeTimesForDate] = useState([]);
   const [initialRemarks, setInitialRemarks] = useState('');
   const [adminMessage, setAdminMessage] = useState('');
-  const [dateError, setDateError] = useState(false);
+  
 
   const [editedPurpose, setEditedPurpose] = useState(reservation?.purpose || '');
   const [editedStartDate, setEditedStartDate] = useState(reservation?.startDate || '');
@@ -72,8 +76,6 @@ const ReservationCardAdmin = React.memo(
     return totalMinutes / interval;
   };
 
-  const BUSINESS_HOURS_START = { hours: 8, minutes: 30 }; // 8:30 AM
-  const BUSINESS_HOURS_END = { hours: 16, minutes: 30 };  // 4:30 PM
 
   const lunchBreakTimes = selectedDate
   ? [
@@ -91,6 +93,7 @@ const maxTime = selectedDate
   : createTime(new Date(), BUSINESS_HOURS_END.hours, BUSINESS_HOURS_END.minutes);
 
   // Custom input for the time picker
+  CustomInput.propTypes = { value: PropTypes.any, onClick: PropTypes.any }; CustomInput.displayName = 'CustomInput';
   const CustomInput = forwardRef(({ value, onClick }, ref) => (
     <Input
     onClick={onClick}
@@ -105,7 +108,9 @@ const maxTime = selectedDate
   ));
 
   // Calendar Container for DatePicker
-  const CalendarContainer = ({ children }) => {
+  const CalendarContainer = ({ children }) => { CalendarContainer.propTypes = { children: PropTypes.any };
+ CalendarContainer.propTypes = { children: PropTypes.any };
+
     return (
       <Box zIndex={1500} position="relative">
         {children}
@@ -177,7 +182,7 @@ const maxTime = selectedDate
     try {
 
       if (!appointmentDate) {
-        setDateError(true);
+        
         toast({
           title: 'Appointment Date Required',
           description: 'Please set an appointment date and time before approving.',
@@ -471,7 +476,7 @@ const maxTime = selectedDate
       // Show error message
       toast({
         title: 'Error',
-        description: 'An error occurred while updating the reservation.',
+        description: err.response?.data?.message || 'An error occurred while updating the reservation.',
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -548,11 +553,11 @@ const maxTime = selectedDate
         isClosable: true,
       });
       onClose();
-    } catch (error) {
+    } catch (err) {
 
       toast({
         title: 'Error',
-        description: 'Failed to delete the reservation.',
+        description: err.response?.data?.message || 'Failed to delete the reservation.',
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -1987,6 +1992,7 @@ const maxTime = selectedDate
     </>
     );
   }
-));
+);
 
 export default ReservationCardAdmin;
+ReservationCardAdmin.propTypes = { isOpen: PropTypes.any, onOpen: PropTypes.any, onClose: PropTypes.any, reservation: PropTypes.any, bookings: PropTypes.any, listings: PropTypes.any, deleteReservation: PropTypes.any };

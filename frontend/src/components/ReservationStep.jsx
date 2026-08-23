@@ -1,6 +1,7 @@
-import React from 'react';
+
 import { Box, Flex, Text, VStack, Icon } from '@chakra-ui/react';
 import { FaMousePointer, FaListAlt, FaClock, FaFileUpload, FaCheckCircle, FaDoorOpen } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 const ReservationStep = ({ title, description, icon }) => {
   return (
@@ -78,3 +79,14 @@ const ReservationStepList = () => {
 };
 
 export default ReservationStepList;
+
+ReservationStep.propTypes = {
+  title: PropTypes.any,
+  description: PropTypes.any,
+  icon: PropTypes.any,
+};
+ReservationStepList.propTypes = {
+  title: PropTypes.any,
+  description: PropTypes.any,
+  icon: PropTypes.any,
+};

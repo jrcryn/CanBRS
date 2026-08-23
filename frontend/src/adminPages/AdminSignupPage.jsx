@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   VStack,
   HStack,
@@ -9,11 +9,10 @@ import {
   InputRightElement,
   Box,
   Select,
-  Avatar,
+  
   FormControl,
   FormLabel,
-  useToast,
-} from '@chakra-ui/react';
+  useToast} from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/auth.js';
@@ -144,7 +143,7 @@ function SignupPage() {
                 onChange={handleChange}
                 placeholder="Select Sitio"
               >
-                {Sitios.map((sitio) => (
+                {Sitios?.map((sitio) => (
                   <option key={sitio} value={sitio}>
                     {sitio}
                   </option>

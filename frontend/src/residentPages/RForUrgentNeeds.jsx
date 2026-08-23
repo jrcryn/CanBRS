@@ -1,5 +1,4 @@
-import {  Container, Text, VStack, HStack, Box, Card, CardBody, Heading, Stack, SimpleGrid,
-} from '@chakra-ui/react';
+import {  Container, Text, VStack,   Card, CardBody, Heading, Stack, SimpleGrid} from '@chakra-ui/react';
 
 const resources = [
   {
@@ -46,7 +45,7 @@ const ForUrgentNeeds = () => {
 
         {/* Resource Cards in a Responsive Grid */}
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} w="full">
-          {resources.map((resource, index) => (
+          {resources?.map((resource, index) => (
             <Card key={index} maxW="full" bg="gray.50" shadow="md" h="full">
               <CardBody display="flex" flexDirection="column" justifyContent="space-between" h="full">
                 <VStack align="start" spacing={3} flexGrow={1}>

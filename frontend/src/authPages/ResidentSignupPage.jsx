@@ -93,7 +93,7 @@ function ResidentSignupPage() {
 
     const missingFields = requiredFields.filter(field => !formData[field])
 
-    if (missingFields.length > 0) {
+    if (missingFields?.length > 0) {
       toast({
         title: 'Missing Fields',
         description: `Please fill in: ${missingFields.join(', ')}`,
@@ -257,7 +257,7 @@ function ResidentSignupPage() {
                   onChange={handleChange}
                   placeholder="Select Sitio"
                 >
-                  {Sitios.map((sitio) => (
+                  {Sitios?.map((sitio) => (
                     <option key={sitio} value={sitio}>
                       {sitio}
                     </option>
@@ -348,7 +348,7 @@ function ResidentSignupPage() {
                   onChange={handleChange}
                 />
                 <FormHelperText>
-                  Please enter the number on your valid ID, make sure it's correct.
+                  Please enter the number on your valid ID, make sure it&apos;s correct.
                 </FormHelperText>
               </FormControl>
             </GridItem>
@@ -437,7 +437,7 @@ function ResidentSignupPage() {
               Create Account
             </Button>
             <Text textAlign={'center'} fontSize="sm" color="gray.600">
-              All of the information you provide will be securely stored and used for resident account verification purposes, so make sure they're correct. We will not share your information with any third parties.
+              All of the information you provide will be securely stored and used for resident account verification purposes, so make sure they&apos;re correct. We will not share your information with any third parties.
             </Text>
           </Stack>
           <Stack pt={4}>

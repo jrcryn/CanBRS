@@ -1,5 +1,6 @@
 import { Box, Heading, Image, Text, Badge, Divider, Spacer } from '@chakra-ui/react';
-import React from 'react';
+import PropTypes from 'prop-types';
+
 
 const ListingCard = ({ listing }) => {
   const isAvailable = listing.inventory ? true : false;
@@ -62,3 +63,6 @@ const ListingCard = ({ listing }) => {
 };
 
 export default ListingCard;
+ListingCard.propTypes = {
+  listing: PropTypes.any,
+};

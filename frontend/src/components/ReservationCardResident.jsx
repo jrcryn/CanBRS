@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
   Box,
   Text,
@@ -19,6 +19,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { FaCalendarAlt, FaClipboardList, FaClock } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 function TrackReservationListResident({ reservation }) {
 
@@ -88,7 +89,7 @@ function TrackReservationListResident({ reservation }) {
               <Text fontWeight="bold" color="gray.600" fontSize="md">
                 Resources:
               </Text>
-              {reservation.resources.map((item) => (
+              {reservation.resources?.map((item) => (
                 <Text key={item.resourceId._id} color="gray.700" fontSize="sm">
                   {item.resourceId.name}{' '}
                   {item.resourceId.type === 'facility' ? (
@@ -233,3 +234,6 @@ function TrackReservationListResident({ reservation }) {
 }
 
 export default TrackReservationListResident;
+TrackReservationListResident.propTypes = {
+  reservation: PropTypes.any,
+};
