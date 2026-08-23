@@ -93,23 +93,23 @@ export const useListingStore = create((set) => ({
         }
     },
 
-    // initializeSocketListeners: () => {
-    //     // socket.on('listingCreated', (newListing) => {
-    //     //   set((state) => ({ listing: [...state.listing, newListing] }));
-    //     // });
+    initializeSocketListeners: () => {
+        // socket.on('listingCreated', (newListing) => {
+        //   set((state) => ({ listing: [...state.listing, newListing] }));
+        // });
     
-    //     // socket.on('listingUpdated', (updatedListing) => {
-    //     //   set((state) => ({
-    //     //     listing: state.listing.map((listing) =>
-    //     //       listing._id === updatedListing._id ? updatedListing : listing
-    //     //     ),
-    //     //   }));
-    //     // });
+        // socket.on('listingUpdated', (updatedListing) => {
+        //   set((state) => ({
+        //     listing: state.listing.map((listing) =>
+        //       listing._id === updatedListing._id ? updatedListing : listing
+        //     ),
+        //   }));
+        // });
     
-    //     // socket.on('listingDeleted', ({ id }) => {
-    //     //   set((state) => ({
-    //     //     listing: state.listing.filter((listing) => listing._id !== id),
-    //     //   }));
-    //     // });
-    // },
+        // socket.on('listingDeleted', ({ id }) => {
+        //   set((state) => ({
+        //     listing: state.listing.filter((listing) => listing._id !== id),
+        //   }));
+        // });
+    },
 }));
