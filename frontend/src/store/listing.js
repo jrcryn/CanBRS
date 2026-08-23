@@ -36,10 +36,10 @@ export const useListingStore = create((set) => ({
           params: { excludeImages },
         });
         const data = res.data;
-        console.log('Fetched listings:', data);
+
         set({ listing: data.data, isLoading: false });
       } catch (error) {
-        console.error('Error fetching listings:', error);
+
         set({ isLoading: false, error });
       }
     },
@@ -54,26 +54,15 @@ export const useListingStore = create((set) => ({
         });
         set({ listingsWithoutImages: res.data.data, isLoading: false });
       } catch (error) {
-        console.error('Error fetching listings without images:', error);
+
         set({ isLoading: false, error });
       }
     },
 
-    updateListing: async (id, updates, isFormData) => {
+    updateListing: async (id, updates) => {
       set({ isLoading: true });
       try {
-        let config = {};
-        let dataToSend = updates;
-    
-        if (isFormData) {
-          config = {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          };
-        }
-    
-        const response = await axios.put(`${API_URL}/update-listing/${id}`, updates, config);
+        const response = await axios.put(`${API_URL}/update-listing/${id}`, updates);
         const updatedListing = response.data.data;
     
         set((state) => ({
@@ -85,7 +74,7 @@ export const useListingStore = create((set) => ({
         set({ isLoading: false });
         return updatedListing;
       } catch (error) {
-        console.error('Error updating listing:', error);
+
         set({ isLoading: false });
         throw error;
       }
@@ -100,7 +89,7 @@ export const useListingStore = create((set) => ({
           }));
           set({ isLoading: false });
         } catch (error) {
-          console.error('Error deleting listing:', error);
+
           set({ isLoading: false });
         }
     },

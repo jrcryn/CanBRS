@@ -42,7 +42,7 @@ function ResetPassword() {
         isClosable: true,
       });
     } catch (error) {
-      console.log(error);
+
       toast({
         title: 'Error.',
         description: error.message || 'Error resetting password.',

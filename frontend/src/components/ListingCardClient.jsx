@@ -17,7 +17,7 @@ const ListingCard = ({ listing }) => {
       flexDirection="column"
     >
       <Image
-        src={`data:${listing.image.contentType};base64,${listing.image.data}`}
+        src={listing.image || 'placeholder-image-url'}
         alt={listing.name}
         h="250px"
         w="full"

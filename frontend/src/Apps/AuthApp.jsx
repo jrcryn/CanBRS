@@ -12,6 +12,7 @@ import ForgotPasswordAdmin from '../authPages/ForgotPasswordAdmin'
 import ResetPassword from '../authPages/ResetPassword'
 import LoginPageOtp from '../authPages/LoginOtpPage'
 import PleaseWaitForVerification from '../authPages/PleaseWaitForVerification'
+import NotFound from '../components/NotFound'
 
 const RedirectAuthenticatedUser = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -20,11 +21,11 @@ const RedirectAuthenticatedUser = ({ children }) => {
     if (!user.isVerified) {
       return <Navigate to='/auth/verify-signup-otp' replace />;
     } else if (user.role === 'admin') {
-      return <Navigate to='/admin/dashboard' replace />;
+      return <Navigate to='/admin/reservations' replace />;
     } else if (user.role === 'resident') {
       return <Navigate to='/resident' replace />;
     } else {
-      return <Navigate to='/404' replace />;
+      return <Navigate to='/' replace />;
     }
   }
 
@@ -39,8 +40,8 @@ function AuthApp() {
     checkAuth()
   }, [checkAuth])
 
-  console.log('isAuthenticated', isAuthenticated)
-  console.log('user', user)
+
+
 
   return (
     <Box>
@@ -88,6 +89,7 @@ function AuthApp() {
         <Route path='verify-login-otp' element={<LoginPageOtp/>} />
 
         <Route path='please-wait-for-verification' element={<PleaseWaitForVerification/>} />
+        <Route path='*' element={<NotFound/>} />
 
       </Routes>
 

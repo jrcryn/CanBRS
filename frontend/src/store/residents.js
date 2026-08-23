@@ -63,11 +63,11 @@ export const UseResidentStore = create((set) => ({
             const response = await axios.get(`${API_URL}/resident-accounts`, {
                 withCredentials: true,
             });
-            console.log('Fetched residents:', response.data.residents);
+
             set({ residents: response.data.residents, isLoading: false });
     
         } catch (error) {
-            console.error('Error fetching residents:', error);
+
             set({ error: 'Failed to fetch residents', isLoading: false });
             
         }
@@ -79,11 +79,11 @@ export const UseResidentStore = create((set) => ({
             const response = await axios.get(`${API_URL}/admin-accounts`, {
                 withCredentials: true,
             });
-            console.log('Fetched admins:', response.data.admins);
+
             set({ admins: response.data.admins, isLoading: false });
     
         } catch (error) {
-            console.error('Error fetching admins:', error);
+
             set({ error: 'Failed to fetch admins', isLoading: false });
             
         }

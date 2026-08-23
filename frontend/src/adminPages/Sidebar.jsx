@@ -11,7 +11,7 @@ import { FaClipboardList, FaUsers, FaSignOutAlt, FaTruckLoading, FaHouseUser, Fa
 import { RiAdminFill } from "react-icons/ri";
 import { MdDashboard } from "react-icons/md";
 
-const Dashboard = () => {
+const Dashboard = ({ isMobile, onClose }) => {
   const { logout } = useAuthStore();
   const handleLogout = () => {
     logout();
@@ -27,7 +27,7 @@ const Dashboard = () => {
       p={4}
       display="flex"
       flexDirection="column"
-      position="fixed"
+      position={isMobile ? 'static' : 'fixed'}
     >
       {/* Logo Placeholder */}
       <Box
@@ -56,6 +56,7 @@ const Dashboard = () => {
         _hover={{ bg: 'white', color: 'blue.600' }}
         mb={2}
         borderRadius="md"
+        onClick={isMobile ? onClose : undefined}
       >
         Reservations
       </Button>
@@ -70,6 +71,7 @@ const Dashboard = () => {
         _hover={{ bg: 'white', color: 'blue.600' }}
         mb={2}
         borderRadius="md"
+        onClick={isMobile ? onClose : undefined}
       >
         In-Use Resources
       </Button>
@@ -85,6 +87,7 @@ const Dashboard = () => {
         _hover={{ bg: 'white', color: 'blue.600' }}
         mb={2}
         borderRadius="md"
+        onClick={isMobile ? onClose : undefined}
       >
         Listings
       </Button>
@@ -100,6 +103,7 @@ const Dashboard = () => {
         _hover={{ bg: 'white', color: 'blue.600' }}
         mb={2}
         borderRadius="md"
+        onClick={isMobile ? onClose : undefined}
       >
         Admin Accounts
       </Button>
@@ -115,6 +119,7 @@ const Dashboard = () => {
         _hover={{ bg: 'white', color: 'blue.600' }}
         mb={2}
         borderRadius="md"
+        onClick={isMobile ? onClose : undefined}
       >
         Resident Accounts
       </Button>
@@ -130,6 +135,7 @@ const Dashboard = () => {
         _hover={{ bg: 'white', color: 'blue.600' }}
         mb={2}
         borderRadius="md"
+        onClick={isMobile ? onClose : undefined}
       >
         Registration Key
       </Button>
@@ -145,6 +151,7 @@ const Dashboard = () => {
         _hover={{ bg: 'white', color: 'blue.600' }}
         mb={2}
         borderRadius="md"
+        onClick={isMobile ? onClose : undefined}
       >
         Logs
       </Button>

@@ -17,8 +17,8 @@ const ListingSchema = new mongoose.Schema({
         required: true,
     },
     image: {
-        data: String,
-        contentType: String,
+        type: String,
+        required: true,
     },
 }, {
     timestamps: true,

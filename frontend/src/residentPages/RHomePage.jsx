@@ -63,10 +63,10 @@ function HomePage() {
         />
       </Flex>
     </Stack>
-    <Box mt={100}> {/* Adjust the margin-top value as needed */}
+    <Box mt={{ base: 12, md: 24 }}> {/* Adjust the margin-top value as needed */}
         <ReservationProcess />
     </Box>
-    <Box mt={10}> {/* Adjust the margin-top value as needed */}
+    <Box mt={{ base: 8, md: 10 }}> {/* Adjust the margin-top value as needed */}
         <ReservationStep />
     </Box>
     </>

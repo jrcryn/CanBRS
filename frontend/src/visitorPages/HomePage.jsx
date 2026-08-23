@@ -62,6 +62,7 @@ function HomePage() {
           }
         />
       </Flex>
+      
     </Stack>
     <Box mt={100}> {/* Adjust the margin-top value as needed */}
         <ReservationProcess />

@@ -160,7 +160,7 @@ const InquireForm = () => {
 
       navigate('/resident/track-reservation');
     } catch (error) {
-      console.error('Error submitting reservation:', error);
+
       toast({
         title: 'Submission Error',
         description: 'There was a problem submitting your request.',
@@ -175,12 +175,12 @@ const InquireForm = () => {
     <Box
       maxW="1000px"
       mx={{ base: 2, md: "auto" }}
-      p={8}
+      p={{ base: 4, md: 8 }}
       borderWidth={1}
       borderRadius="lg"
       boxShadow="lg"
       bg="white"
-      mt={8}
+      mt={{ base: 4, md: 8 }}
     >
       <Heading as="h2" size="xl" textAlign="center" color="blue.600" mb={4}>
         Request Form

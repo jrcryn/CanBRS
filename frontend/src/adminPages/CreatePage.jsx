@@ -40,7 +40,7 @@ const CreatePage = () => {
             const data = await createListing(formData);
             // Handle success or error
         } catch (error) {
-            console.error('Error creating listing:', error);
+
         }
     };
 

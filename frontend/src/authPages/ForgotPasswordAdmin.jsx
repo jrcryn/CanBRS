@@ -47,7 +47,7 @@ import { Button, FormControl, Flex, Heading, Input, Stack, Text, useColorModeVal
         bg={useColorModeValue('gray.50', 'gray.800')}>
   
           <Button
-            onClick={() => navigate('/auth/resident-login' || '/auth/admin-login')}
+            onClick={() => navigate('/auth/admin-login')}
             colorScheme="blue"
             variant="outline"
             position={{ base: 'relative', md: 'absolute' }}
