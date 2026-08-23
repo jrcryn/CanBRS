@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 import axios from 'axios';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 
 const API_URL = import.meta.env.VITE_API_URL;
-const socket = io(API_URL);
+// const socket = io(API_URL);
 
 // Ensure axios sends cookies if your backend uses sessions
 axios.defaults.withCredentials = true;
@@ -93,23 +93,23 @@ export const useListingStore = create((set) => ({
         }
     },
 
-    initializeSocketListeners: () => {
-        socket.on('listingCreated', (newListing) => {
-          set((state) => ({ listing: [...state.listing, newListing] }));
-        });
+    // initializeSocketListeners: () => {
+    //     // socket.on('listingCreated', (newListing) => {
+    //     //   set((state) => ({ listing: [...state.listing, newListing] }));
+    //     // });
     
-        socket.on('listingUpdated', (updatedListing) => {
-          set((state) => ({
-            listing: state.listing.map((listing) =>
-              listing._id === updatedListing._id ? updatedListing : listing
-            ),
-          }));
-        });
+    //     // socket.on('listingUpdated', (updatedListing) => {
+    //     //   set((state) => ({
+    //     //     listing: state.listing.map((listing) =>
+    //     //       listing._id === updatedListing._id ? updatedListing : listing
+    //     //     ),
+    //     //   }));
+    //     // });
     
-        socket.on('listingDeleted', ({ id }) => {
-          set((state) => ({
-            listing: state.listing.filter((listing) => listing._id !== id),
-          }));
-        });
-    },
+    //     // socket.on('listingDeleted', ({ id }) => {
+    //     //   set((state) => ({
+    //     //     listing: state.listing.filter((listing) => listing._id !== id),
+    //     //   }));
+    //     // });
+    // },
 }));
