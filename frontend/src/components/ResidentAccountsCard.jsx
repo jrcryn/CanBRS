@@ -57,7 +57,7 @@ const handleApproveResident = async () => {
         })
         onClose();
     } catch (error) {
-        console.error('Error approving resident:', error);
+
         toast({
           title: 'Error',
           description: typeof error === 'string' ? error : 'Failed to approve resident.',
@@ -105,7 +105,7 @@ const handleDeclineResident = async () => {
     closeDeclineModal();
     onClose();
   } catch (error) {
-    console.error('Error declining resident:', error);
+
     toast({
       title: 'Error',
       description: typeof error === 'string' ? error : 'Failed to decline resident.',

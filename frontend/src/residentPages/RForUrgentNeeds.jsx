@@ -34,11 +34,11 @@ const ForUrgentNeeds = () => {
       <VStack spacing={8} align="start">
         
         {/* Header Section */}
-        <HStack justifyContent="space-between" w="full" flexWrap="wrap">
+        <Stack direction={{ base: 'column', md: 'row' }} justifyContent="space-between" w="full">
           <Text fontSize={{ base: '3xl', md: '4xl' }} fontWeight="bold" color="blue.600">
             For Urgent Needs
           </Text>
-        </HStack>
+        </Stack>
         
         <Text fontSize={{ base: 'md', md: 'lg' }} color="gray.700">
           The following resources and services are available without booking or reserving for your emergency needs.

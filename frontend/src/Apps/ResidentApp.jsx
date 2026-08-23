@@ -14,6 +14,7 @@ import PoliciesPage from '../residentPages/RPoliciesPage'
 import TrackReservation from '../residentPages/RTrackReservationPage'
 
 import LoadingSpinner from '../components/LoadingSpinner'
+import NotFound from '../components/NotFound'
 
 // ProtectedRoute component for routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -50,6 +51,7 @@ function ResidentApp() {
           <Route path='reservation-policies' element={<PoliciesPage />} />
           <Route path='request-form' element={<RequestPage />} />
           <Route path='track-reservation' element={<TrackReservation />} />
+          <Route path='*' element={<NotFound/>} />
 
         </Routes>
         <Box pt={75}>

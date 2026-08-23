@@ -49,9 +49,10 @@ const PleaseWaitForVerification = () => {
 
             <Button
               colorScheme="blue"
+              w="full"
               size="lg"
-              onClick={() => navigate('/auth/login')}
-              w={{ base: 'full', md: 'auto' }}
+              onClick={() => navigate('/auth/resident-login')}
+              _hover={{ bg: 'blue.600' }}
             >
               Back to Login
             </Button>

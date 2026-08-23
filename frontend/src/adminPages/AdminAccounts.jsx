@@ -20,6 +20,7 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
+  Stack,
 } from '@chakra-ui/react';
 
 import { SearchIcon, AddIcon } from '@chakra-ui/icons';
@@ -59,14 +60,14 @@ const AdminAccountsPage = () => {
     <Container maxW="container.xl" py={5}>
       <VStack spacing={4} align="stretch">
         {/* Header Section */}
-        <HStack justifyContent="space-between" w="full" flexWrap="wrap">
+        <Stack direction={{ base: 'column', md: 'row' }} justifyContent="space-between" w="full" flexWrap="wrap">
           {/* Title */}
           <Text fontSize="3xl" fontWeight="bold" color="blue.600">
             Admin Accounts
           </Text>
 
           {/* Search and Role Filter */}
-          <HStack spacing={4} flexWrap="wrap">
+          <Stack direction={{ base: 'column', md: 'row' }} spacing={4} flexWrap="wrap" w={{ base: 'full', md: 'auto' }}>
             {/* Search Input */}
             <InputGroup width={{ base: 'full', md: '250px' }}>
               <InputLeftElement pointerEvents="none">
@@ -80,13 +81,13 @@ const AdminAccountsPage = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </InputGroup>
-            <HStack>
-            <Button colorScheme="blue" onClick={() => navigate('/admin/create-admin')} leftIcon={<AddIcon />}>
-              Create Admin
-            </Button>
-          </HStack>
-          </HStack>
-        </HStack>
+            <Box w={{ base: 'full', md: 'auto' }}>
+              <Button w={{ base: 'full', md: 'auto' }} colorScheme="blue" onClick={() => navigate('/admin/create-admin')} leftIcon={<AddIcon />}>
+                Create Admin
+              </Button>
+            </Box>
+          </Stack>
+        </Stack>
 
         {/* Admins List */}
         {filteredAdmins.length === 0 ? (
@@ -120,7 +121,7 @@ const AdminCard = ({ admin }) => {
         _hover={{ shadow: 'lg' }}
         transition="all 0.2s"
       >
-        <HStack spacing={4}>
+        <Stack direction={{ base: 'column', md: 'row' }} spacing={4} align={{ base: 'center', md: 'start' }} textAlign={{ base: 'center', md: 'left' }}>
           {/* Avatar */}
           <Avatar
             name={`${admin.name}`}
@@ -133,7 +134,7 @@ const AdminCard = ({ admin }) => {
           />
 
           {/* Admin Info */}
-          <VStack align="start" spacing={1} flex="1">
+          <VStack align={{ base: 'center', md: 'start' }} spacing={1} flex="1">
             <Text fontWeight="bold" fontSize="lg">
               {admin.name}
             </Text>
@@ -141,14 +142,14 @@ const AdminCard = ({ admin }) => {
           </VStack>
 
           {/* View Details Button */}
-          <Button onClick={onOpen} colorScheme="blue">
+          <Button onClick={onOpen} colorScheme="blue" w={{ base: 'full', md: 'auto' }}>
             View Details
           </Button>
-        </HStack>
+        </Stack>
       </Box>
 
       {/* Details Modal */}
-      <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
+      <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'full', md: 'lg' }} isCentered>
       <ModalOverlay />
       <ModalContent borderRadius="md" overflow="hidden">
         {/* Header */}
@@ -160,7 +161,7 @@ const AdminCard = ({ admin }) => {
         <ModalBody bg="gray.50" py={6}>
           <VStack spacing={6} align="stretch">
             {/* Admin Info */}
-            <HStack spacing={4}>
+            <Stack direction={{ base: 'column', md: 'row' }} spacing={4} align={{ base: 'center', md: 'start' }} textAlign={{ base: 'center', md: 'left' }}>
             <Avatar
               name={`${admin.name}`}
               size="xl"
@@ -170,14 +171,14 @@ const AdminCard = ({ admin }) => {
                   : ''
               }
             />
-              <VStack align="start">
+              <VStack align={{ base: 'center', md: 'start' }}>
                 <Text fontWeight="bold" fontSize="2xl">
                   {admin.name}
                 </Text>
                 <Text color="gray.600">{admin.email}</Text>
                 <Text color="gray.600">{admin.phone || 'N/A'}</Text>
               </VStack>
-            </HStack>
+            </Stack>
 
             {/* Contact Information */}
             <Box p={4} bg="white" borderRadius="md" shadow="sm" border="1px solid" borderColor="gray.200">

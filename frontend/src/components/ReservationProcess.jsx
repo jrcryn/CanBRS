@@ -1,10 +1,11 @@
 import React from 'react';
-import { Box, Text, VStack, HStack, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Text, VStack, Flex, useBreakpointValue } from '@chakra-ui/react';
 
 const ReservationStep = ({ stepNumber, stepText }) => {
   // Define responsive size values based on breakpoints
-  const boxSize = useBreakpointValue({ base: '100px', md: '150px' });
-  const fontSize = useBreakpointValue({ base: 'sm', md: 'md' });
+  const boxSize = useBreakpointValue({ base: '100px', sm: '120px', md: '150px' });
+  const fontSize = useBreakpointValue({ base: 'xs', sm: 'sm', md: 'md' });
+  const circleSize = useBreakpointValue({ base: '24px', sm: '28px', md: '30px' });
 
   return (
     <VStack
@@ -15,22 +16,25 @@ const ReservationStep = ({ stepNumber, stepText }) => {
       borderRadius="md"
       justify="center"
       textAlign="center"
-      spacing={2}
+      spacing={{ base: 1, md: 2 }}
+      p={2}
+      boxShadow="md"
     >
       <Box
         bg="white"
         color="blue.500"
         borderRadius="full"
-        w="30px"
-        h="30px"
+        w={circleSize}
+        h={circleSize}
         display="flex"
         alignItems="center"
         justifyContent="center"
         fontWeight="bold"
+        fontSize={{ base: 'sm', md: 'md' }}
       >
         {stepNumber}
       </Box>
-      <Text fontWeight="bold" fontSize={fontSize} whiteSpace="pre-wrap" textAlign="center">
+      <Text fontWeight="bold" fontSize={fontSize} whiteSpace="pre-wrap" textAlign="center" lineHeight="1.2">
         {stepText}
       </Text>
     </VStack>
@@ -38,25 +42,22 @@ const ReservationStep = ({ stepNumber, stepText }) => {
 };
 
 const ReservationProcess = () => {
-  // Stack vertically on small screens, horizontally on medium and up
-  const direction = useBreakpointValue({ base: 'column', md: 'row' });
-  const spacing = useBreakpointValue({ base: 4, md: 6 });
-
   return (
-    <VStack spacing={10}>
+    <VStack spacing={{ base: 6, md: 10 }} w="full" px={{ base: 4, md: 8 }}>
       <Text fontSize={{ base: '2xl', md: '4xl' }} fontWeight="bold" color="blue.500" textAlign="center">
         Reservation Process
       </Text>
-      <HStack spacing={spacing} flexWrap="wrap" justify="center" direction={direction}>
-      <ReservationStep stepNumber="1" stepText="Browse     Resources" />
-        <ReservationStep stepNumber="2" stepText="Submit         Request" />
-        <ReservationStep stepNumber="3" stepText="Wait for      Approval" />
-        <ReservationStep stepNumber="4" stepText="Submit Requirements" />
-        <ReservationStep stepNumber="5" stepText="Wait for Confirmation" />
-        <ReservationStep stepNumber="6" stepText="Resource      Secured" />
-      </HStack>
+      <Flex flexWrap="wrap" justify="center" gap={{ base: 3, sm: 4, md: 6 }} maxW="1200px">
+        <ReservationStep stepNumber="1" stepText={"Browse\nResources"} />
+        <ReservationStep stepNumber="2" stepText={"Submit\nRequest"} />
+        <ReservationStep stepNumber="3" stepText={"Wait for\nApproval"} />
+        <ReservationStep stepNumber="4" stepText={"Submit\nRequirements"} />
+        <ReservationStep stepNumber="5" stepText={"Wait for\nConfirmation"} />
+        <ReservationStep stepNumber="6" stepText={"Resource\nSecured"} />
+      </Flex>
     </VStack>
   );
 };
 
 export default ReservationProcess;
+

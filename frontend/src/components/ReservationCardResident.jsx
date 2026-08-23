@@ -38,7 +38,7 @@ function TrackReservationListResident({ reservation }) {
 
   return (
     <Box
-      p={6}
+      p={{ base: 4, md: 6 }}
       borderWidth={1}
       borderRadius="lg"
       boxShadow="lg"
@@ -81,9 +81,9 @@ function TrackReservationListResident({ reservation }) {
         <Divider />
 
         {/* Content */}
-        <Wrap spacing={4} align="center" justify="space-between" w="full">
+        <Wrap spacing={4} align="flex-start" justify="space-between" w="full">
           {/* Resources */}
-          <WrapItem flex="1">
+          <WrapItem flex="1" minW={{ base: '100%', sm: '200px' }}>
             <VStack align="start" spacing={1}>
               <Text fontWeight="bold" color="gray.600" fontSize="md">
                 Resources:
@@ -102,7 +102,7 @@ function TrackReservationListResident({ reservation }) {
           </WrapItem>
 
           {/* Purpose */}
-          <WrapItem flex="1">
+          <WrapItem flex="1" minW={{ base: '100%', sm: '150px' }}>
             <VStack align="start" spacing={1}>
               <Text fontWeight="bold" color="gray.600" fontSize="md">
                 Purpose:
@@ -114,7 +114,7 @@ function TrackReservationListResident({ reservation }) {
           </WrapItem>
 
           {/* Start Date */}
-          <WrapItem flex="1">
+          <WrapItem flex="1" minW={{ base: '100%', sm: '150px' }}>
             <HStack spacing={2}>
               <Icon as={FaCalendarAlt} color="teal.500" boxSize={5} />
               <Text color="gray.700" fontSize="sm">
@@ -125,7 +125,7 @@ function TrackReservationListResident({ reservation }) {
           </WrapItem>
 
           {/* End Date */}
-          <WrapItem flex="1">
+          <WrapItem flex="1" minW={{ base: '100%', sm: '150px' }}>
             <HStack spacing={2}>
               <Icon as={FaCalendarAlt} color="teal.500" boxSize={5} />
               <Text color="gray.700" fontSize="sm">

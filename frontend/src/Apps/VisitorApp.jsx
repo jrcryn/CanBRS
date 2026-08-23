@@ -9,6 +9,7 @@ import PoliciesPage from '../visitorPages/PoliciesPage'
 
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import NotFound from '../components/NotFound'
 
 function VisitorApp() {
 
@@ -21,6 +22,7 @@ function VisitorApp() {
         <Route path='urgent-needs' element={<ForUrgentNeeds/>} />
         <Route path='request-form' element={<RequestPage/>} />
         <Route path='reservation-policies' element={<PoliciesPage/>} />
+        <Route path='*' element={<NotFound/>} />
       </Routes>
       <Box pt={75}>
         <Footer/>

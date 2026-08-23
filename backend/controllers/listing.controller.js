@@ -27,7 +27,7 @@ export const createListing = async (req, res) => {
     try {
         const { name, inventory, description, type, address } = req.body;
 
-        if (!name || !description || !type || !req.file) {
+        if (!name || !description || !type || !req.body.image) {
             return res.status(400).json({ success: false, message: 'Please provide all required fields.' });
         }
 
@@ -43,10 +43,7 @@ export const createListing = async (req, res) => {
             name,
             description,
             type,
-            image: {
-                data: fs.readFileSync(req.file.path, 'base64'),
-                contentType: req.file.mimetype
-            },
+            image: req.body.image,
         });
 
         // Add inventory or address based on type
@@ -72,7 +69,7 @@ export const createListing = async (req, res) => {
 //UPDATE or PUT listing (working)
 export const updateListing = async (req, res) => {
     const { id } = req.params;
-    const { name, inventory, description, type, address } = req.body;
+    const { name, inventory, description, type, address, image } = req.body;
   
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).json({ success: false, message: 'Invalid Listing Id' });
@@ -83,6 +80,7 @@ export const updateListing = async (req, res) => {
   
       if (name !== undefined) updateData.name = name;
       if (description !== undefined) updateData.description = description;
+      if (image !== undefined) updateData.image = image;
   
       // Only update the type if it's provided
       if (type) {
@@ -109,12 +107,7 @@ export const updateListing = async (req, res) => {
         }
       }
   
-      if (req.file) {
-        updateData.image = {
-          data: fs.readFileSync(req.file.path, 'base64'),
-          contentType: req.file.mimetype,
-        };
-      }
+
   
       const updatedListing = await Listing.findByIdAndUpdate(id, updateData, { new: true });
   

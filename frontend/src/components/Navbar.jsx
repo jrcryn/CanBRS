@@ -239,23 +239,6 @@ const NAV_ITEMS = [
     label: 'Reservation Policies',
     href: '/reservation-policies',
   },
-
-  {
-    label: 'Support',
-
-    children: [
-      {
-        label: 'System How-To',
-        subLabel: 'Learn how to use the system',
-        href: '/system-how-to',
-      },
-      {
-        label: 'Privacy Policy',
-        subLabel: 'Learn about our website privacy policy',
-        href: '/privacy-policy',
-      },
-    ],
-  },
 ]
 
 export default Navbar

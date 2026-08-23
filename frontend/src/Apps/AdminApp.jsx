@@ -17,6 +17,7 @@ import RegistrationKey from '../adminPages/RegistrationKey'
 import AdminSignupPage from '../adminPages/AdminSignupPage'
 import LoadingSpinner from '../components/LoadingSpinner'
 import AdminLogs from '../adminPages/AdminLogs'
+import NotFound from '../components/NotFound'
 
 //protect routes that require authentication
 const ProtectedRoute = ({children}) => {
@@ -58,6 +59,7 @@ function AdminApp() {
         <Route path='unverified-residents' element={<UnverifiedResidents />}/>
         <Route path='registration-key' element={<RegistrationKey />}/>
         <Route path='admin-logs' element={<AdminLogs />}/>
+        <Route path='*' element={<NotFound/>} />
       </Routes>
       </Layout>
       </ProtectedRoute>

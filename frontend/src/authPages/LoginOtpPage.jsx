@@ -20,7 +20,7 @@ function LoginOtpPage() {
     try {
       const response = await verifyLoginOtp(userId, otp);
       const role = response.user.role;
-      console.log('Response: ', response);
+
 
       toast({
         title: 'Logged in.',

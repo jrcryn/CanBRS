@@ -29,11 +29,11 @@ export const useReservationStore = create((set) => ({
         try {
             const res = await axios.get(`${API_URL}/track-reservations`);
             const data = res.data;
-            console.log('Fetched reservations:', data); // to see reservations in console
+
             set({ reservation: data.data, isLoading: false });
 
         } catch (error) {
-            console.error('Error fetching reservations:', error);
+
             set({ isLoading: false, error });
         }
     },
@@ -45,11 +45,11 @@ export const useReservationStore = create((set) => ({
                 withCredentials: true,
             });
             const data = res.data;
-            console.log('Fetched reservations:', data); // to see reservations in console
+
             set({ reservation: data.data, isLoading: false });
 
         } catch (error) {
-            console.error('Error fetching reservations:', error);
+
             set({ isLoading: false, error });
         }
     },
